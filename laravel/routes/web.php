@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +13,5 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('top/{message}', 'UserController@index');
+Route::get('/top/{message}',[UserController::class,'index' ]);
 ?>

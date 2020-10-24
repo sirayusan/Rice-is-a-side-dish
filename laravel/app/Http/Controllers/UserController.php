@@ -1,12 +1,12 @@
 <?php
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 
 class UserController extends Controller
 {
   public function index($message)
   {
-      $d = $message;
-      return view('top', $d);
+    $a = 'message';
+    $d = $message;
+    return view('top', compact('a','d'));
   }
 }
- ?>
