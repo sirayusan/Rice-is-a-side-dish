@@ -6,10 +6,7 @@
     <title></title>
   </head>
   <body>
-    おすすめのプリンは～～～～～～？？
-    これです！！！！！
-
-   <?php var_dump($d); ?>
+   <?php echo $d; ?>
     <!-- <img class="logo" src="{{ asset('/pudding.jpg') }}" alt="logo"> -->
   </body>
 </html>
