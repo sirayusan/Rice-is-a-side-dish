@@ -1,7 +1,7 @@
 <?php
 
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\TopController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/top/{message}',[UserController::class,'index' ]);
+Route::get('/top',[TopController::class,'index' ]);
 
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
