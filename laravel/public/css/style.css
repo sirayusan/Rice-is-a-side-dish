@@ -1,0 +1,33 @@
+.gloval_fixed_menu_inner {
+  float: left;
+  margin:0px 10px;
+}
+
+#gloval_fixed_menu {
+  position:fixed;
+  padding: 10px;
+  background-color: black;
+  color: white;
+}
+
+/* わかりやすいように訪問後もしろくしとく */
+#gloval_fixed_menu :visited {
+  color: white;
+}
+.wrap {
+  padding: 20px;
+}
+
+.gnav li li {
+    height: 0;
+    overflow: hidden;
+    transition: .5s;
+}
+.gnav li li a {
+    border-top: 1px solid #eee;
+}
+.gnav li:hover > ul > li {
+    height: 2rem;
+    overflow: visible;
+    background-color: red;
+}
