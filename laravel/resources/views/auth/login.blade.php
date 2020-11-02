@@ -65,6 +65,7 @@
                             </div>
                         </div>
                     </form>
+                    <a href="../top">トップへ</a>
                 </div>
             </div>
         </div>

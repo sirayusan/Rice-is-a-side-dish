@@ -1,6 +1,3 @@
-<?php
-// use App\Models\Post;
-?>
 
 
 <!DOCTYPE html>
@@ -33,19 +30,16 @@
         </ul>
       </nav>
     </header>
-  <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
-  <div class="wrap"></div>
-  <a href="../post/create">投稿する</a>
-  <br>
-  <a href="../logout">ログアウトする</a>
-  <p>投稿一覧表示</p>
-  @foreach ($show_posts as $show_post)
-    <div class="post">
-      <p>user_id</p>
-      <p>{{ $show_post->user_id }}</p>
-      <p>投稿内容</p>
-      <p>{{ $show_post->comment }}</p>
-    </div>
-  @endforeach
+    <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
+    <div class="wrap"></div>
+    <p>以下の内容で投稿完了しました</p>
+    <br>
+    <p>user_id</p>
+    <?php echo $store_post_create['user_id']; ?>
+    <br>
+    <p>投稿内容</p>
+    <?php echo $store_post_create['comment']; ?>
+    <br>
+    <a href="../top">トップページヘ戻る</a>
   </body>
 </html>

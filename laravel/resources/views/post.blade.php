@@ -1,7 +1,3 @@
-<?php
-// use App\Models\Post;
-?>
-
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -33,19 +29,25 @@
         </ul>
       </nav>
     </header>
-  <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
-  <div class="wrap"></div>
-  <a href="../post/create">投稿する</a>
-  <br>
-  <a href="../logout">ログアウトする</a>
-  <p>投稿一覧表示</p>
-  @foreach ($show_posts as $show_post)
-    <div class="post">
-      <p>user_id</p>
-      <p>{{ $show_post->user_id }}</p>
-      <p>投稿内容</p>
-      <p>{{ $show_post->comment }}</p>
-    </div>
-  @endforeach
+    <div class="wrap"></div>
+    <h1>ポスト作成</h1>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
+    <form class="" action="../post" method="post" enctype="multipart/form-data">
+       @csrf
+      <dt class=""><label for="comment">画像説明文</label></dt>
+      <dd><textarea id="" name="comment" rows="4" cols="40"></textarea></dd>
+      <input type="submit" value="送信ボタン" >
+    </form>
+    <a href="../top">トップへ</a>
   </body>
 </html>

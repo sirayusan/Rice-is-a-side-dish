@@ -31,3 +31,13 @@
     overflow: visible;
     background-color: red;
 }
+
+.post {
+  margin: 10px 10px;
+  width: 130px;
+  height: auto;
+  float: left;
+  text-align: center;
+  background-color: blue;
+  border: 1px solid;
+}
