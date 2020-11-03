@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -35,10 +33,10 @@
     <p>以下の内容で投稿完了しました</p>
     <br>
     <p>user_id</p>
-    <?php echo $store_post_create['user_id']; ?>
+    <p>{{ $post_info['user_id'] }}</p>
     <br>
     <p>投稿内容</p>
-    <?php echo $store_post_create['comment']; ?>
+    <p>{{ $post_info['comment'] }}</p>
     <br>
     <a href="../top">トップページヘ戻る</a>
   </body>

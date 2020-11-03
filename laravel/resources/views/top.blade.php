@@ -1,8 +1,3 @@
-<?php
-// use App\Models\Post;
-?>
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -37,14 +32,18 @@
   <div class="wrap"></div>
   <a href="../post/create">投稿する</a>
   <br>
-  <a href="../logout">ログアウトする</a>
+  <!-- postメソッドで移動させるためにformでpost指定 -->
+  <form method="post" name="form_1" id="form_1" action="/logout">
+      <input type="hidden" name="user_name" placeholder="ユーザー名">
+      <a href="javascript:form_1.submit()">ログアウト</a>
+  </form>
   <p>投稿一覧表示</p>
-  @foreach ($show_posts as $show_post)
+  @foreach ($posts as $post)
     <div class="post">
       <p>user_id</p>
-      <p>{{ $show_post->user_id }}</p>
+      <p>{{ $post{'user_id'} }}</p>
       <p>投稿内容</p>
-      <p>{{ $show_post->comment }}</p>
+      <p>{{ $post['comment'] }}</p>
     </div>
   @endforeach
   </body>

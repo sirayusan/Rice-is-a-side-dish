@@ -4,6 +4,7 @@
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//topページ
+Route::resource('top',TopController::class)->only([
+    'index'
+]);;
+
 //投稿関連
-Route::get('/top',[TopController::class,'index']);
-Route::get('/post/create',[PostController::class,'create']);
-Route::post('/post',[PostController::class,'store']);
+Route::resource('post',PostController::class)->only([
+    'create', 'store'
+]);;
 
 //認証機能
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //ログアウト
-Route::get('/logout',[PostController::class,'logout']);
+Route::post('/user/logout',[UserController::class,'logout']);

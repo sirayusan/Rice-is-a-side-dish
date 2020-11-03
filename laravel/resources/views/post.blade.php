@@ -42,10 +42,10 @@
     @endif
 
     <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
-    <form class="" action="../post" method="post" enctype="multipart/form-data">
+    <form action="../post" method="post" enctype="multipart/form-data">
        @csrf
-      <dt class=""><label for="comment">画像説明文</label></dt>
-      <dd><textarea id="" name="comment" rows="4" cols="40"></textarea></dd>
+      <dt><label for="comment">画像説明文</label></dt>
+      <dd><textarea name="comment" rows="4" cols="40"></textarea></dd>
       <input type="submit" value="送信ボタン" >
     </form>
     <a href="../top">トップへ</a>

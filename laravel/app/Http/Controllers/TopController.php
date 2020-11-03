@@ -7,15 +7,15 @@ use App\Models\Post;
 
 class TopController extends Controller
 {
-  public function index()
-  {
-    // Frameworksモデルのインスタンス化
-    $md = new Post();
+    public function index()
+    {
+        // Frameworksモデルのインスタンス化
+        $md = new Post();
 
-    // データ取得
-    $show_posts = $md->get_post();
+        // 全データ取得
+        $posts = $md->get();
 
-    // ビューを返す
-    return view('top',compact('show_posts'));
-  }
+        // ビューを返す
+        return view('top',compact('posts'));
+    }
 }
