@@ -13,7 +13,7 @@ class TopController extends Controller
         $md = new Post();
 
         // 全データ取得
-        $posts = $md->get();
+        $posts = $md->all();
 
         // ビューを返す
         return view('top',compact('posts'));

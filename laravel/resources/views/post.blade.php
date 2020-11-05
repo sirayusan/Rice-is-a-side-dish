@@ -30,7 +30,6 @@
       </nav>
     </header>
     <div class="wrap"></div>
-      <p>{{ $login_parameter }}</p>
     <h1>ポスト作成</h1>
     @if ($errors->any())
         <div class="alert alert-danger">

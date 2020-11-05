@@ -24,11 +24,10 @@ class PostController extends Controller
     public function create(Request $request)
     {
       //ログイン状態確認。未ログインであれば会員登録ページへ飛ばす（この対処は仮）
-      $login_parameter = Auth::check();
-      if ($login_parameter === false) {
+      if (Auth::check() === false) {
           return view('auth/login');
       }
-      return view('post',compact('login_parameter'));
+      return view('post');
     }
 
     /**
@@ -61,7 +60,7 @@ class PostController extends Controller
         $post->fill($post_info)->save();
 
         //VIEWファイルと変数を返す。
-        return view('post_complete',compact('post_info'));
+        return redirect('top');
     }
 
   /**
