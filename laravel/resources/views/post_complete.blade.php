@@ -28,22 +28,16 @@
         </ul>
       </nav>
     </header>
-  <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
-  <div class="wrap"></div>
-  <a href="../post/create">投稿する</a>
-  <br>
-  <!-- postメソッドで移動させるためにformでpost指定 -->
-  <form method="post" name="form_1" id="form_1" action="/user/logout">
-      <input type="hidden" name="user_name" placeholder="ユーザー名">
-      <a href="javascript:form_1.submit()">ログアウト</a>
-  <p>投稿一覧表示</p>
-  @foreach ($posts as $post)
-    <div class="post">
-      <p>user_id</p>
-      <p>{{ $post{'user_id'} }}</p>
-      <p>投稿内容</p>
-      <p>{{ $post['comment'] }}</p>
-    </div>
-  @endforeach
+    <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
+    <div class="wrap"></div>
+    <p>以下の内容で投稿完了しました</p>
+    <br>
+    <p>user_id</p>
+    <p>{{ $post_info['user_id'] }}</p>
+    <br>
+    <p>投稿内容</p>
+    <p>{{ $post_info['comment'] }}</p>
+    <br>
+    <a href="../top">トップページヘ戻る</a>
   </body>
 </html>

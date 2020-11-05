@@ -1,12 +1,16 @@
 <?php
 namespace App\Http\Controllers;
 
+use Auth;
+
 class UserController extends Controller
 {
-  public function index($message)
-  {
-    $a = 'message';
-    $d = $message;
-    return view('top', compact('a','d'));
-  }
+    //ログアウト
+    public function user_logout() {
+       return Auth::logout();
+    }
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
 }
