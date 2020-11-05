@@ -32,4 +32,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //ログアウト
-Route::post('/user/logout',[UserController::class,'logout']);
+Route::post('/user/logout',[UserController::class,'user_logout'])->name('user_logout');

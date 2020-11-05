@@ -6,8 +6,8 @@ use Auth;
 class UserController extends Controller
 {
     //ログアウト
-    public function logout(){
-        return Auth::logout();
+    public function user_logout() {
+       return Auth::logout();
     }
 
     public function __construct(){

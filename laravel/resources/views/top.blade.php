@@ -33,10 +33,9 @@
   <a href="../post/create">投稿する</a>
   <br>
   <!-- postメソッドで移動させるためにformでpost指定 -->
-  <form method="post" name="form_1" id="form_1" action="/logout">
+  <form method="post" name="form_1" id="form_1" action="/user/logout">
       <input type="hidden" name="user_name" placeholder="ユーザー名">
       <a href="javascript:form_1.submit()">ログアウト</a>
-  </form>
   <p>投稿一覧表示</p>
   @foreach ($posts as $post)
     <div class="post">
