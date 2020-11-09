@@ -5,7 +5,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -33,10 +32,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //プロフィール機能
-Route::resource('profile',ProfileController::class);
-// ->only([
-//     'index','store'
-// ]);
+Route::resource('profile',UserController::class)->only([
+    'index','store'
+]);
 
 //ログアウト
 Route::post('/user/logout',[UserController::class,'user_logout'])->name('user_logout');
