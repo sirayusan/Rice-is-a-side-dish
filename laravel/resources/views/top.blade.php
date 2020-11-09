@@ -32,6 +32,8 @@
   <div class="wrap"></div>
   <a href="../post/create">投稿する</a>
   <br>
+  <a href="../profile">profile</a>
+  <br>
   <!-- postメソッドで移動させるためにformでpost指定 -->
   <form method="post" name="form_1" id="form_1" action="/user/logout">
       <input type="hidden" name="user_name" placeholder="ユーザー名">
