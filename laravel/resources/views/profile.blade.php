@@ -41,31 +41,40 @@
     <a href="../top">トップへ</a>
     <form action="/profile" method="post" enctype="multipart/form-data">
       {{ csrf_field() }}
-      <div class="">
+      @if ($errors->any())
+	    <div class="alert alert-danger">
+	        <ul>
+	            @foreach ($errors->all() as $error)
+	                <li>{{ $error }}</li>
+	            @endforeach
+	        </ul>
+	    </div>
+	    @endif
+      <div>
         <br>
         <p>アイコン</p>
-        <img class="logo" src="{{ asset('/img/user/'.$data['image']) }}" alt="logo" width="80px">
+        <img class="logo" src="{{ $user_image_path.$user->image }}" alt="logo" width="80px">
         <br>
         <label for="image">画像変更</label>
         <input type="file" name="image" value="">
         <br>
         <label for="name">名前</label>
-        <input type="text" name="name" value="{{ $data['name'] }}">
+        <input type="text" name="name" value="{{ $user->name }}">
         <br>
         <p>メールアドレス    一部のみ表示しています。</p>
-        <p>{{ $data['mail'] }}</p>
+        <p>{{ substr($user->email, 0, 4)."***@****" }}</p>
         <br>
         <p>自己紹介文</p>
-        <input type="text" name="comment" value="{{ $data['comment'] }}">
+        <input type="text" name="comment" value="{{ $user->comment }}">
         <br>
         <input type="submit" value="送信">
       </div>
     </form>
     <p>投稿一覧</p>
-    @foreach ($get_posts as $get_post)
+    @foreach ($posts as $post)
       <div class="post">
         <p>投稿内容</p>
-        <p>{{ $get_post['comment'] }}</p>
+        <p>{{ $post->comment }}</p>
       </div>
     @endforeach
   </body>
