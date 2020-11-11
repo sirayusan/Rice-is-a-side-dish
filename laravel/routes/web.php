@@ -33,7 +33,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //プロフィール機能
 Route::resource('profile',UserController::class)->only([
-    'index','store'
+    'show','store'
 ]);
 
 //ログアウト

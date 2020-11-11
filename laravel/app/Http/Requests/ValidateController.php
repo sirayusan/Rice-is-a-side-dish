@@ -24,9 +24,9 @@ class ValidateController extends FormRequest
     public function rules()
     {
         return   [
-                    'name'        => 'nullable|string|max: 30',
+                    'name'        => 'required|string|max: 30',
                     'email'       => 'nullable|string|max: 1000',
-                    'comment'     => 'nullable|max: 256',
+                    'comment'     => 'required|max: 256',
                     'image'       => 'image|max:10000'
                ];
     }

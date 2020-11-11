@@ -53,7 +53,7 @@
       <div>
         <br>
         <p>アイコン</p>
-        <img class="logo" src="{{ $user_image_path.$user->image }}" alt="logo" width="80px">
+        <img class="logo" src="{{ $user_image_path }}" alt="logo" width="80px">
         <br>
         <label for="image">画像変更</label>
         <input type="file" name="image" value="">
