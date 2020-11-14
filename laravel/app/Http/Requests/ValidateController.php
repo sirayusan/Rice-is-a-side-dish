@@ -25,7 +25,6 @@ class ValidateController extends FormRequest
     {
         return   [
                     'name'        => 'required|string|max: 30',
-                    'email'       => 'nullable|string|max: 1000',
                     'comment'     => 'required|max: 256',
                     'image'       => 'image|max:10000'
                ];

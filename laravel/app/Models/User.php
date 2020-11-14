@@ -42,11 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function get_post()
+   public function posts()
    {
-       return $this->hasMany(
-           'App\Models\Post',
-           'user_id',
-       );
+          return $this->hasMany('App\Models\Post');
    }
+
 }

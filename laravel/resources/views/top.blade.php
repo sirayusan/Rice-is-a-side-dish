@@ -30,9 +30,9 @@
     </header>
   <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
   <div class="wrap"></div>
-  <a href="../post/create">投稿する</a>
+  <a href="{{ url('/post/create') }}">投稿する</a>
   <br>
-  <a href="../profile/show">profile</a>
+  <a href="{{ route('users.show') }}">profile</a>
   <br>
   <!-- postメソッドで移動させるためにformでpost指定 -->
   <form method="post" name="form_1" id="form_1" action="/user/logout">

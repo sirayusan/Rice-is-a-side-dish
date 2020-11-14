@@ -32,7 +32,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //プロフィール機能
-Route::resource('profile',UserController::class)->only([
+Route::resource('users',UserController::class)->only([
     'show','store'
 ]);
 

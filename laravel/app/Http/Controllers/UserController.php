@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateController;
 use App\Models\Post;
-use App \Models\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -35,7 +35,8 @@ class UserController extends Controller
             $user_image_path =   asset("/UserImage/$user->image");
         }
 
-        $posts = User::find(Auth::id())->get_post()->where('user_id',Auth::id())->get();
+        $posts = User::find($user->id)->posts()->get();
+        // dd($posts);
 
         return view('profile',compact('user','posts','user_image_path'));
     }
@@ -48,7 +49,7 @@ class UserController extends Controller
         $user->comment = $request['comment'];
 
         //formから画像ファイルの実態を受け取っていたら画像ファイル名取得し、保存する
-        if (isset($request['image']) === true)
+        if (isset($request['image']))
         {
             $fileName = hash('sha256',time() . $request['image']->getClientOriginalName());
             $target_path = storage_path('app/public/image/UserImage');
