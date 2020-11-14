@@ -16,26 +16,26 @@
             <li>
             <a href="">Menu1</a>
             <ul>
-              <li><a href="../home">会員登録はこちら</a></li>
-              <li><a href="../home">会員登録はこちら</a></li>
-              <li><a href="../home">会員登録はこちら</a></li>
+              <li><a href="{{ route('home') }}">会員登録はこちら</a></li>
+              <li><a href="{{ route('home') }}">会員登録はこちら</a></li>
+              <li><a href="{{ route('home') }}">会員登録はこちら</a></li>
             </ul>
             </li>
           </ul>
-          <li class="gloval_fixed_menu_inner"><a href="../home">会員登録はこちら</a></li>
-          <li class="gloval_fixed_menu_inner"><a href="../home">会員登録はこちら</a></li>
-          <li class="gloval_fixed_menu_inner"><a href="../home">会員登録はこちら</a></li>
+          <li class="gloval_fixed_menu_inner"><a href="{{ route('home') }}">会員登録はこちら</a></li>
+          <li class="gloval_fixed_menu_inner"><a href="{{ route('home') }}">会員登録はこちら</a></li>
+          <li class="gloval_fixed_menu_inner"><a href="{{ route('home') }}">会員登録はこちら</a></li>
         </ul>
       </nav>
     </header>
   <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
   <div class="wrap"></div>
-  <a href="{{ url('/post/create') }}">投稿する</a>
+  <a href="{{ route('post.create') }}">投稿する</a>
   <br>
-  <a href="{{ route('users.show') }}">profile</a>
+  <a href="{{ route('users.show',['user'=>'profile']) }}">profile</a>
   <br>
   <!-- postメソッドで移動させるためにformでpost指定 -->
-  <form method="post" name="form_1" id="form_1" action="/user/logout">
+  <form method="post" name="form_1" id="form_1" action="{{ route('logout') }}">
       <input type="hidden" name="user_name" placeholder="ユーザー名">
       <a href="javascript:form_1.submit()">ログアウト</a>
   <p>投稿一覧表示</p>

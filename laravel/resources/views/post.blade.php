@@ -17,15 +17,15 @@
             <li>
             <a href="">Menu1</a>
             <ul>
-              <li><a href="../home">会員登録はこちら</a></li>
-              <li><a href="../home">会員登録はこちら</a></li>
-              <li><a href="../home">会員登録はこちら</a></li>
+              <li><a href="{{ route('home') }}">会員登録はこちら</a></li>
+              <li><a href="{{ route('home') }}">会員登録はこちら</a></li>
+              <li><a href="{{ route('home') }}">会員登録はこちら</a></li>
             </ul>
             </li>
           </ul>
-          <li class="gloval_fixed_menu_inner"><a href="../home">会員登録はこちら</a></li>
-          <li class="gloval_fixed_menu_inner"><a href="../home">会員登録はこちら</a></li>
-          <li class="gloval_fixed_menu_inner"><a href="../home">会員登録はこちら</a></li>
+          <li class="gloval_fixed_menu_inner"><a href="{{ route('home') }}">会員登録はこちら</a></li>
+          <li class="gloval_fixed_menu_inner"><a href="{{ route('home') }}">会員登録はこちら</a></li>
+          <li class="gloval_fixed_menu_inner"><a href="{{ route('home') }}">会員登録はこちら</a></li>
         </ul>
       </nav>
     </header>
@@ -48,6 +48,6 @@
       <dd><textarea name="comment" rows="4" cols="40"></textarea></dd>
       <input type="submit" value="送信ボタン" >
     </form>
-    <a href="../top">トップへ</a>
+    <a href="{{ route('top.index') }}">トップへ</a>
   </body>
 </html>

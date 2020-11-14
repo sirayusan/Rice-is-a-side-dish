@@ -16,29 +16,24 @@
             <li>
             <a href="">Menu1</a>
             <ul>
-              <li><a href="../home">会員登録はこちら</a></li>
-              <li><a href="../home">会員登録はこちら</a></li>
-              <li><a href="../home">会員登録はこちら</a></li>
+              <li><a href="{{ route('home') }}">会員登録はこちら</a></li>
+              <li><a href="{{ route('home') }}">会員登録はこちら</a></li>
+              <li><a href="{{ route('home') }}">会員登録はこちら</a></li>
             </ul>
             </li>
           </ul>
-          <li class="gloval_fixed_menu_inner"><a href="../home">会員登録はこちら</a></li>
-          <li class="gloval_fixed_menu_inner"><a href="../home">会員登録はこちら</a></li>
-          <li class="gloval_fixed_menu_inner"><a href="../home">会員登録はこちら</a></li>
+          <li class="gloval_fixed_menu_inner"><a href="{{ route('home') }}">会員登録はこちら</a></li>
+          <li class="gloval_fixed_menu_inner"><a href="{{ route('home') }}">会員登録はこちら</a></li>
+          <li class="gloval_fixed_menu_inner"><a href="{{ route('home') }}">会員登録はこちら</a></li>
         </ul>
       </nav>
     </header>
     <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
     <div class="wrap"></div>
     <h1>プロフィール</h1>
-    <a href="../post/create">投稿する</a>
+    <a href="{{ route('post.create') }}">投稿する</a>
     <br>
-    <!-- postメソッドで移動させるためにformでpost指定 -->
-    <form method="post" name="form_1" id="form_1" action="/user/logout">
-        <input type="hidden" name="user_name" placeholder="ユーザー名">
-        <a href="javascript:form_1.submit()">ログアウト</a>
-    </form>
-    <a href="../top">トップへ</a>
+    <a href="{{ route('top.index') }}">トップへ</a>
     <form action="/profile" method="post" enctype="multipart/form-data">
       {{ csrf_field() }}
       @if ($errors->any())
