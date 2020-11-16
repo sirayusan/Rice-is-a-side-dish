@@ -18,7 +18,7 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function show($user)
+    public function show($id)
     {
         if (Auth::check() === false )
         {
