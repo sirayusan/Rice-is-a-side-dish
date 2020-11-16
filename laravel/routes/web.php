@@ -31,5 +31,10 @@ Route::resource('post',PostController::class)->only([
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//プロフィール機能
+Route::resource('users',UserController::class)->only([
+    'show','store'
+]);
+
 //ログアウト
 Route::post('/user/logout',[UserController::class,'user_logout'])->name('user_logout');

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -29,25 +28,49 @@
         </ul>
       </nav>
     </header>
-    <div class="wrap"></div>
-    <h1>ポスト作成</h1>
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
-    <form action="../post" method="post" enctype="multipart/form-data">
-       @csrf
-      <dt><label for="comment">画像説明文</label></dt>
-      <dd><textarea name="comment" rows="4" cols="40"></textarea></dd>
-      <input type="submit" value="送信ボタン" >
-    </form>
+    <div class="wrap"></div>
+    <h1>プロフィール</h1>
+    <a href="{{ route('post.create') }}">投稿する</a>
+    <br>
     <a href="{{ route('top.index') }}">トップへ</a>
+    <form action="/users" method="post" enctype="multipart/form-data">
+      {{ csrf_field() }}
+      @if ($errors->any())
+	    <div class="alert alert-danger">
+	        <ul>
+	            @foreach ($errors->all() as $error)
+	                <li>{{ $error }}</li>
+	            @endforeach
+	        </ul>
+	    </div>
+	    @endif
+      <div>
+        <br>
+        <p>アイコン</p>
+        <img class="logo" src="{{ $user_image_path }}" alt="logo" width="80px">
+        <br>
+        <label for="image">画像変更</label>
+        <input type="file" name="image" value="">
+        <br>
+        <label for="name">名前</label>
+        <input type="text" name="name" value="{{ $user->name }}">
+        <br>
+        <p>メールアドレス    一部のみ表示しています。</p>
+        <p>{{ substr($user->email, 0, 4)."***@****" }}</p>
+        <br>
+        <p>自己紹介文</p>
+        <input type="text" name="comment" value="{{ $user->comment }}">
+        <br>
+        <input type="submit" value="送信">
+      </div>
+    </form>
+    <p>投稿一覧</p>
+    @foreach ($posts as $post)
+      <div class="post">
+        <p>投稿内容</p>
+        <p>{{ $post->comment }}</p>
+      </div>
+    @endforeach
   </body>
 </html>

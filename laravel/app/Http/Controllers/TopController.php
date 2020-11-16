@@ -9,13 +9,10 @@ class TopController extends Controller
 {
     public function index()
     {
-        // Frameworksモデルのインスタンス化
         $md = new Post();
 
-        // 全データ取得
         $posts = $md->all();
 
-        // ビューを返す
         return view('top',compact('posts'));
     }
 }
