@@ -34,7 +34,7 @@
     <a href="{{ route('post.create') }}">投稿する</a>
     <br>
     <a href="{{ route('top.index') }}">トップへ</a>
-    <form action="/profile" method="post" enctype="multipart/form-data">
+    <form action="/users" method="post" enctype="multipart/form-data">
       {{ csrf_field() }}
       @if ($errors->any())
 	    <div class="alert alert-danger">
