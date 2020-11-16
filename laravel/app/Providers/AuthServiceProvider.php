@@ -25,20 +25,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
     }
-
-    public function register() {
-
-    //UserServiceProviderから受け取った値でAuth::user()を更新する
-		Auth::provider('auth_ex', function($app) {
-			// スタックオーバーフロー先生はこれで取れると書いてあるんだけど、モデルが取れない…
-			// $model = $this->app['config']['auth.model'];
-			$model = $app['config']['auth.providers.users.model'];
-			return new AuthUserProvider($app['hash'], $model);
-		});
-
-	}
-
 }

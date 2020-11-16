@@ -18,7 +18,7 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function show()
+    public function show($user)
     {
         if (Auth::check() === false )
         {
@@ -36,7 +36,6 @@ class UserController extends Controller
         }
 
         $posts = User::find($user->id)->posts()->get();
-        // dd($posts);
 
         return view('profile',compact('user','posts','user_image_path'));
     }

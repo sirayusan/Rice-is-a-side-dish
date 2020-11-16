@@ -1,3 +1,8 @@
+<?php
+namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
+ ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -32,7 +37,9 @@
   <div class="wrap"></div>
   <a href="{{ route('post.create') }}">投稿する</a>
   <br>
-  <a href="{{ route('users.show',['user'=>'profile']) }}">profile</a>
+  @if (Auth::check() === true)
+  <a href="{{ route('users.show',['user'=>Auth::user()]) }}">profile</a>
+  @endif
   <br>
   <!-- postメソッドで移動させるためにformでpost指定 -->
   <form method="post" name="form_1" id="form_1" action="{{ route('logout') }}">
