@@ -70,6 +70,14 @@
       <div class="post">
         <p>投稿内容</p>
         <p>{{ $post->comment }}</p>
+        <form action="{{ route('post.destroy',['post'=>$post->id]) }}" method="post">
+          @method('DELETE')
+          @csrf
+          <input type="submit" value="削除">
+        </form>
+        <form action="{{ route('post.edit',['post'=>$post->id]) }}" method="get">
+          <input type="submit" value="編集">
+        </form>
       </div>
     @endforeach
   </body>

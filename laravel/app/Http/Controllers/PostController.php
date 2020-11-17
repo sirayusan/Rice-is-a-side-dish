@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TopController;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 use Auth;
 
 class PostController extends Controller
@@ -63,27 +64,29 @@ class PostController extends Controller
         return redirect('top');
     }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show()
-  {
+    /**
+    * Display the specified resource.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function show()
+    {
+    }
 
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function edit($id)
-  {
-      //
-  }
+    /**
+    * Show the form for editing the specified resource.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function edit($id)
+    {
+      // $post = new Post;
+      // $posts = $post->where('id',$id)->first();
+      $posts = User::find($id)->post()->get();
+      return view('post_edit',compact('posts'));
+    }
 
   /**
    * Update the specified resource in storage.
@@ -92,10 +95,21 @@ class PostController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, $id)
-  {
-      //
-  }
+   public function update(Request $request, $id)
+   {
+       //$requestのバリデート
+       $validatedData = $request->validate([
+           'comment' => ['required', 'max:255'],
+       ]);
+
+       $post = new Post();
+       $posts = $post->where('id',$id)->first();
+
+       $posts->comment = $validatedData['comment'];
+       $posts->update();
+
+       return redirect('top');
+   }
 
   /**
    * Remove the specified resource from storage.
@@ -103,8 +117,10 @@ class PostController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
-  {
-      //
-  }
+   public function destroy($id)
+   {
+       $post = new Post();
+       $post->where('id',$id)->delete();
+       return redirect('top');
+   }
 }
