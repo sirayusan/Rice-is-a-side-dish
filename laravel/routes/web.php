@@ -24,7 +24,7 @@ Route::resource('top',TopController::class)->only([
 
 //投稿関連
 Route::resource('post',PostController::class)->only([
-    'create', 'store'
+    'create', 'store','destroy','edit','update'
 ]);;
 
 //認証機能

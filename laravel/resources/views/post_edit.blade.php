@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -29,25 +28,16 @@
         </ul>
       </nav>
     </header>
-    <div class="wrap"></div>
-    <h1>ポスト作成</h1>
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
-    <form action="../post" method="post" enctype="multipart/form-data">
-       @csrf
-      <dt><label for="comment">画像説明文</label></dt>
-      <dd><textarea name="comment" rows="4" cols="40"></textarea></dd>
-      <input type="submit" value="送信ボタン" >
-    </form>
-    <a href="{{ route('top.index') }}">トップへ</a>
+    <div class="wrap"></div>
+    <div>
+      <form action="{{ route('post.update',['post'=>$post->id]) }}" method="post">
+        <p>投稿内容</p>
+        <input type="text" name="comment" value="{{ $post->comment }}">
+        @method('PUT')
+        @csrf
+        <input type="submit" name="" value="編集完了">
+      </form>
+    </div>
   </body>
 </html>

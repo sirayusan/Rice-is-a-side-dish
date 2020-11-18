@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <title>トップページ</title>
     <!-- スタイルを明示的にすべてリセットする -->
-    <link href="../css/reset.css" rel="stylesheet" />
+    <link href="{{ asset('css/reset.css') }}" rel="stylesheet" />
     <!-- スタイル指定 -->
-    <link href="../css/style.css" rel="stylesheet" />
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
   </head>
   <body>
     <header id="sample">
@@ -70,6 +70,14 @@
       <div class="post">
         <p>投稿内容</p>
         <p>{{ $post->comment }}</p>
+        <form action="{{ route('post.destroy',['post'=>$post->id]) }}" method="post">
+          @method('DELETE')
+          @csrf
+          <input type="submit" value="削除">
+        </form>
+        <form action="{{ route('post.edit',['post'=>$post->id]) }}" method="get">
+          <input type="submit" value="編集">
+        </form>
       </div>
     @endforeach
   </body>
