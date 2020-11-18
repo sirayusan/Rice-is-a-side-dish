@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <title>トップページ</title>
     <!-- スタイルを明示的にすべてリセットする -->
-    <link href="../css/reset.css" rel="stylesheet" />
+    <link href="{{ asset('css/reset.css') }}" rel="stylesheet" />
     <!-- スタイル指定 -->
-    <link href="../css/style.css" rel="stylesheet" />
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
   </head>
   <body>
     <header id="sample">
@@ -28,10 +28,12 @@
         </ul>
       </nav>
     </header>
+    <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
+    <div class="wrap"></div>
     <div>
-      <form action="{{ route('post.update',['post'=>$posts['id']]) }}" method="post">
+      <form action="{{ route('post.update',['post'=>$posts->id]) }}" method="post">
         <p>投稿内容</p>
-        <input type="text" name="comment" value="{{ $posts['comment'] }}">
+        <input type="text" name="comment" value="{{ $posts->comment }}">
         @method('PUT')
         @csrf
         <input type="submit" name="" value="編集完了">

@@ -82,9 +82,7 @@ class PostController extends Controller
     */
     public function edit($id)
     {
-      // $post = new Post;
-      // $posts = $post->where('id',$id)->first();
-      $posts = User::find($id)->post()->get();
+      $posts = User::find(Auth::id())->posts()->where('id',$id)->first();
       return view('post_edit',compact('posts'));
     }
 
@@ -102,9 +100,7 @@ class PostController extends Controller
            'comment' => ['required', 'max:255'],
        ]);
 
-       $post = new Post();
-       $posts = $post->where('id',$id)->first();
-
+       $posts = User::find(Auth::id())->posts()->where('id',$id)->first();
        $posts->comment = $validatedData['comment'];
        $posts->update();
 

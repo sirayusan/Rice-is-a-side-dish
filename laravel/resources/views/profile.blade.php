@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <title>トップページ</title>
     <!-- スタイルを明示的にすべてリセットする -->
-    <link href="../css/reset.css" rel="stylesheet" />
+    <link href="{{ asset('css/reset.css') }}" rel="stylesheet" />
     <!-- スタイル指定 -->
-    <link href="../css/style.css" rel="stylesheet" />
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
   </head>
   <body>
     <header id="sample">
