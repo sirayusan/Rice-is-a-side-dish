@@ -31,9 +31,9 @@
     <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
     <div class="wrap"></div>
     <div>
-      <form action="{{ route('post.update',['post'=>$posts->id]) }}" method="post">
+      <form action="{{ route('post.update',['post'=>$post->id]) }}" method="post">
         <p>投稿内容</p>
-        <input type="text" name="comment" value="{{ $posts->comment }}">
+        <input type="text" name="comment" value="{{ $post->comment }}">
         @method('PUT')
         @csrf
         <input type="submit" name="" value="編集完了">

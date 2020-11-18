@@ -82,8 +82,8 @@ class PostController extends Controller
     */
     public function edit($id)
     {
-      $posts = User::find(Auth::id())->posts()->where('id',$id)->first();
-      return view('post_edit',compact('posts'));
+      $post = Post::find($id);
+      return view('post_edit',compact('post'));
     }
 
   /**
@@ -100,9 +100,9 @@ class PostController extends Controller
            'comment' => ['required', 'max:255'],
        ]);
 
-       $posts = User::find(Auth::id())->posts()->where('id',$id)->first();
-       $posts->comment = $validatedData['comment'];
-       $posts->update();
+       $post = Post::find($id);
+       $post->comment = $validatedData['comment'];
+       $post->update();
 
        return redirect('top');
    }
@@ -115,8 +115,7 @@ class PostController extends Controller
    */
    public function destroy($id)
    {
-       $post = new Post();
-       $post->where('id',$id)->delete();
+       Post::find($id)->delete();
        return redirect('top');
    }
 }
