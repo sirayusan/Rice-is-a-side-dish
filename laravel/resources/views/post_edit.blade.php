@@ -34,6 +34,13 @@
       <form action="{{ route('post.update',['post'=>$post->id]) }}" method="post">
         <p>投稿内容</p>
         <input type="text" name="comment" value="{{ $post->comment }}">
+        <p>画像</p>
+        @if ($post->image ==  "no_image.png")
+        <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
+        @else
+        <p><img src="{{ asset("/PostImage/$post->image") }}" width="80px"></p>
+        @endif
+        <input type="file" name="image" value="">
         @method('PUT')
         @csrf
         <input type="submit" name="" value="編集完了">

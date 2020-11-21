@@ -90,6 +90,7 @@ return [
         public_path('storage') => storage_path('app/public'),
         public_path('UserImage') => storage_path('app/public/image/UserImage'),
         public_path('SystemImage') => storage_path('app/public/image/SystemImage'),
+        public_path('PostImage') => storage_path('app/public/image/PostImage'),
     ],
 
 ];

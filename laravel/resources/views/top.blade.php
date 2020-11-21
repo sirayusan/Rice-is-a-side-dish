@@ -52,6 +52,11 @@ use Illuminate\Support\Facades\Auth;
       <p>{{ $post{'user_id'} }}</p>
       <p>投稿内容</p>
       <p>{{ $post['comment'] }}</p>
+      @if ($post->image ==  "no_image.png")
+      <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
+      @else
+      <p><img src="{{ asset("/PostImage/$post->image") }}" width="80px"></p>
+      @endif
     </div>
   @endforeach
   </body>
