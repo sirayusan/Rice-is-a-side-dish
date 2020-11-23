@@ -42,11 +42,13 @@
     @endif
 
     <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
-    <form action="../post" method="post" enctype="multipart/form-data">
+    <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
        @csrf
       <dt><label for="comment">画像説明文</label></dt>
       <dd><textarea name="comment" rows="4" cols="40"></textarea></dd>
-      <input type="submit" value="送信ボタン" >
+      <dt><label for="image">画像変更</label></dt>
+      <dd><input type="file" name="image" value=""></dd>
+      <input type="submit" value="投稿する" >
     </form>
     <a href="{{ route('top.index') }}">トップへ</a>
   </body>

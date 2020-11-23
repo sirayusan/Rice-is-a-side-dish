@@ -31,7 +31,7 @@
     <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
     <div class="wrap"></div>
     <h1>プロフィール</h1>
-    <a href="{{ route('post.create') }}">投稿する</a>
+    <a href="{{ route('posts.create') }}">投稿する</a>
     <br>
     <a href="{{ route('top.index') }}">トップへ</a>
     <form action="/users" method="post" enctype="multipart/form-data">
@@ -70,12 +70,17 @@
       <div class="post">
         <p>投稿内容</p>
         <p>{{ $post->comment }}</p>
-        <form action="{{ route('post.destroy',['post'=>$post->id]) }}" method="post">
+        @if ($post->image ==  "no_image.png")
+        <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
+        @else
+        <p><img src="{{ asset("/PostImage/$post->image") }}" width="80px"></p>
+        @endif
+        <form action="{{ route('posts.destroy',['post'=>$post->id]) }}" method="post">
           @method('DELETE')
           @csrf
           <input type="submit" value="削除">
         </form>
-        <form action="{{ route('post.edit',['post'=>$post->id]) }}" method="get">
+        <form action="{{ route('posts.edit',['post'=>$post->id]) }}" method="get">
           <input type="submit" value="編集">
         </form>
       </div>

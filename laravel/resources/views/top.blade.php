@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Auth;
     </header>
   <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
   <div class="wrap"></div>
-  <a href="{{ route('post.create') }}">投稿する</a>
+  <a href="{{ route('posts.create') }}">投稿する</a>
   <br>
   @if (Auth::check() === true)
   <a href="{{ route('users.show',['user'=>Auth::user()]) }}">profile</a>
@@ -52,6 +52,11 @@ use Illuminate\Support\Facades\Auth;
       <p>{{ $post{'user_id'} }}</p>
       <p>投稿内容</p>
       <p>{{ $post['comment'] }}</p>
+      @if ($post->image ==  "no_image.png")
+      <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
+      @else
+      <p><img src="{{ asset("/PostImage/$post->image") }}" width="80px"></p>
+      @endif
     </div>
   @endforeach
   </body>

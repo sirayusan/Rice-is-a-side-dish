@@ -43,24 +43,25 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
-        //$requestのバリデート
         $validatedData = $request->validate([
-            'comment' => ['required', 'unique:posts', 'max:255'],
+            'comment' => ['required', 'max:255'],
+            'image'   => ['image'],
         ]);
 
-        //DBに保存したい値を配列化する
-        $post_info = array(
-            'comment' => $validatedData['comment'],
-            'user_id' => Auth::id(),
-        );
-
-        //Postモデルのインスタンス化
         $post = new Post();
-        //Postインスタンスに配列（$store_post_create）を入れ、DBに保存する。
-        $post->fill($post_info)->save();
 
-        //VIEWファイルと変数を返す。
+        if (isset($request['image']))
+        {
+            $fileName = hash('sha256',time() . $request['image']->getClientOriginalName());
+            $target_path = storage_path('app/public/image/PostImage');
+            $request['image']->move($target_path, $fileName);
+            $post->image = $fileName;
+        }
+
+        $post->comment = $validatedData['comment'];
+        $post->user_id = Auth::id();
+        $post->save();
+
         return redirect('top');
     }
 
@@ -98,9 +99,17 @@ class PostController extends Controller
        //$requestのバリデート
        $validatedData = $request->validate([
            'comment' => ['required', 'max:255'],
+           'image'   => ['image'],
        ]);
 
        $post = Post::find($id);
+       if (isset($request['image']))
+       {
+         $fileName = hash('sha256',time() . $request['image']->getClientOriginalName());
+         $target_path = storage_path('app/public/image/PostImage');
+         $request['image']->move($target_path, $fileName);
+         $post->image = $fileName;
+       }
        $post->comment = $validatedData['comment'];
        $post->update();
 
