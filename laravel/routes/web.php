@@ -23,7 +23,7 @@ Route::resource('top',TopController::class)->only([
 ]);;
 
 //投稿関連
-Route::resource('post',PostController::class)->only([
+Route::resource('posts',PostController::class)->only([
     'create', 'store','destroy','edit','update'
 ]);;
 

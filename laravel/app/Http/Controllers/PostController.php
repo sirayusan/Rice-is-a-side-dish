@@ -102,8 +102,6 @@ class PostController extends Controller
            'image'   => ['image'],
        ]);
 
-       dd($request['image']);
-
        $post = Post::find($id);
        if (isset($request['image']))
        {

@@ -42,7 +42,7 @@
     @endif
 
     <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
-    <form action="../post" method="post" enctype="multipart/form-data">
+    <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
        @csrf
       <dt><label for="comment">画像説明文</label></dt>
       <dd><textarea name="comment" rows="4" cols="40"></textarea></dd>

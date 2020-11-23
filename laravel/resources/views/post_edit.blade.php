@@ -31,7 +31,7 @@
     <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
     <div class="wrap"></div>
     <div>
-      <form action="{{ route('post.update',['post'=>$post->id]) }}" method="post">
+      <form action="{{ route('posts.update',['post'=>$post->id]) }}" method="post" enctype="multipart/form-data">
         <p>投稿内容</p>
         <input type="text" name="comment" value="{{ $post->comment }}">
         <p>画像</p>

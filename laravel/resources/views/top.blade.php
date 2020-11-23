@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Auth;
     </header>
   <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
   <div class="wrap"></div>
-  <a href="{{ route('post.create') }}">投稿する</a>
+  <a href="{{ route('posts.create') }}">投稿する</a>
   <br>
   @if (Auth::check() === true)
   <a href="{{ route('users.show',['user'=>Auth::user()]) }}">profile</a>
