@@ -71,8 +71,14 @@ class PostController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function show()
+    public function show($id)
     {
+      $post = Post::find($id);
+      $replies = Post::find($id)->replies()->get();
+      foreach ($replies as $replie) {
+        $replie->user_name = User::select('name')->where('id',$replie->user_id)->get();
+      }
+      return view('replies',compact('post','replies'));
     }
 
     /**

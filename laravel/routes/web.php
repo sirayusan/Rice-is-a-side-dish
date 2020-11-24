@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RepliesController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +25,11 @@ Route::resource('top',TopController::class)->only([
 
 //投稿関連
 Route::resource('posts',PostController::class)->only([
-    'create', 'store','destroy','edit','update'
+    'create', 'store','destroy','edit','update','show'
 ]);;
+
+//コメント機能
+Route::post('/replies/{post}',[RepliesController::class, 'store'])->name('replies');
 
 //認証機能
 Auth::routes();

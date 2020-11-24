@@ -15,4 +15,9 @@ class Post extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function replies()
+    {
+           return $this->hasMany('App\Models\replies');
+    }
 }

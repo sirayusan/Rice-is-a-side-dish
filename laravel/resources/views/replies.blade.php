@@ -35,21 +35,13 @@ use Illuminate\Support\Facades\Auth;
     </header>
   <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
   <div class="wrap"></div>
-  <a href="{{ route('posts.create') }}">投稿する</a>
+  <a href="{{ route('top.index') }}">トップへ</a>
   <br>
-  @if (Auth::check() === true)
-  <a href="{{ route('users.show',['user'=>Auth::user()]) }}">profile</a>
-  @endif
-  <br>
-  <!-- postメソッドで移動させるためにformでpost指定 -->
-  <form method="post" name="form_1" id="form_1" action="{{ route('logout') }}">
-      <input type="hidden" name="user_name" placeholder="ユーザー名">
-      <a href="javascript:form_1.submit()">ログアウト</a>
   <p>投稿一覧表示</p>
-  @foreach ($posts as $post)
-    <div class="post">
+    <div>
       <p>タイトル</p>
-      <a href="{{ route('posts.show',['post' => $post->id]) }}">{{ $post['title'] }}</a>
+      <p>{{ $post['title'] }}</p>
+      <p>投稿内容</p>
       <p>{{ $post['comment'] }}</p>
       @if ($post->image ==  "no_image.png")
       <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
@@ -57,6 +49,28 @@ use Illuminate\Support\Facades\Auth;
       <p><img src="{{ asset("/PostImage/$post->image") }}" width="80px"></p>
       @endif
     </div>
-  @endforeach
+    <br>
+    <div>
+      <p>コメント表示</p>
+      @foreach ($replies as $replie)
+      <div class="replies">
+        <p>投稿日</p>
+        <p>{{ $replie->created_at }}</p>
+        <p>投稿者</p>
+        <p>{{ $replie->user_name }}</p>
+        <p>コメント</p>
+        <p>{{ $replie->comment }}</p>
+      </div>
+      @endforeach
+    </div>
+    <div>
+      <form action="{{ route('replies',['post' => $post->id]) }}" method="post" enctype="multipart/form-data">
+         @csrf
+         <p>コメントする</p>
+        <dt><label for="comment">本文</label></dt>
+        <dd><textarea name="comment" rows="4" cols="40"></textarea></dd>
+        <input type="submit" value="送信" >
+      </form>
+    </div>
   </body>
 </html>
