@@ -49,6 +49,8 @@ class RepliesController extends Controller
         $replies->user_id = Auth::id();
         $replies->post_id = $id;
         $replies->save();
+
+        return redirect('top');
     }
 
     /**

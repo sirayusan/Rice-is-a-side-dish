@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Http\Controllers\PostController;
 use Illuminate\Database\Eloquent\Model;
 class Replies extends Model
 {
@@ -11,8 +12,8 @@ class Replies extends Model
 
     protected $guarded = array('id');
 
-    public function post()
+    public function user()
     {
-        return $this->belongsTo('App\Models\Post');
+        return $this->belongsTo('App\Models\User');
     }
 }
