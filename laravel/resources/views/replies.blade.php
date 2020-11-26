@@ -64,11 +64,11 @@ use Illuminate\Support\Facades\Auth;
       @endforeach
     </div>
     <div>
-      <form action="{{ route('replies',['post' => $post->id]) }}" method="post" enctype="multipart/form-data">
+      <form action="{{ route('comments.store',['post' => $post->id]) }}" method="post" enctype="multipart/form-data">
          @csrf
          <p>コメントする</p>
-        <dt><label for="comment">本文</label></dt>
-        <dd><textarea name="comment" rows="4" cols="40"></textarea></dd>
+        <dt><label for="Replie">本文</label></dt>
+        <dd><textarea name="Replie" rows="4" cols="40"></textarea></dd>
         <input type="submit" value="送信" >
       </form>
     </div>

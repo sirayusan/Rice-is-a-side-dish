@@ -3,19 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Replies;
+use App\Models\Replie;
+use App\Models\Post;
 use Auth;
 
-class RepliesController extends Controller
+class ReplieController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+      $post = Post::find($id);
+      $replies = Post::find($id)->replies()->get();
+      foreach ($replies as $replie) {
+        $user = Post::find($replie->user_id)->user()->first();
+        $replie->user_name = $user->name;
+      }
+      return view('replies',compact('post','replies'));
     }
 
     /**
@@ -37,15 +44,15 @@ class RepliesController extends Controller
     public function store(Request $request , $id)
     {
         $validatedData = $request->validate([
-            'comment' => ['required', 'max:255'],
+            'Replie' => ['required', 'max:255'],
         ]);
 
         if (Auth::check() === false) {
             return view('auth/login');
         }
 
-        $replies = new Replies();
-        $replies->comment = $validatedData['comment'];
+        $replies = new Replie();
+        $replies->comment = $validatedData['Replie'];
         $replies->user_id = Auth::id();
         $replies->post_id = $id;
         $replies->save();
@@ -61,7 +68,7 @@ class RepliesController extends Controller
      */
     public function show($id)
     {
-        //
+       //
     }
 
     /**

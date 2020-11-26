@@ -8,7 +8,7 @@ use App\Http\Controllers\TopController;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Replies;
+use App\Models\Replie;
 use Auth;
 
 class PostController extends Controller
@@ -74,13 +74,7 @@ class PostController extends Controller
     */
     public function show($id)
     {
-      $post = Post::find($id);
-      $replies = Post::find($id)->replies()->get();
-      foreach ($replies as $replie) {
-        $user = Replies::find($replie->id)->user()->first();
-        $replie->user_name = $user->name;
-      }
-      return view('replies',compact('post','replies'));
+      // 
     }
 
     /**
