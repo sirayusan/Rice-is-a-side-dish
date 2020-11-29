@@ -8,7 +8,6 @@ use App\Http\Controllers\TopController;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Replie;
 use Auth;
 
 class PostController extends Controller
@@ -74,7 +73,7 @@ class PostController extends Controller
     */
     public function show($id)
     {
-      // 
+      //
     }
 
     /**

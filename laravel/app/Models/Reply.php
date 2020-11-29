@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Http\Controllers\PostController;
 use Illuminate\Database\Eloquent\Model;
-class Replie extends Model
+class Reply extends Model
 {
     use HasFactory;
     protected $table = 'Replies';

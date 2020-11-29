@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ReplieController;
+use App\Http\Controllers\ReplyController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ Route::resource('posts',PostController::class)->only([
 ]);
 
 //コメント機能
-Route::resource('/posts/{post_id}/comments',ReplieController::class)->only([
+Route::resource('/posts/{post_id}/comments',ReplyController::class)->only([
     'index','store'
 ]);
 

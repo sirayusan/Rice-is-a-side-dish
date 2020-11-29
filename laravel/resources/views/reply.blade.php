@@ -55,14 +55,14 @@ use App\Models\Replie;
     <br>
     <div>
       <p>コメント表示</p>
-      @foreach ($replies as $replie)
+      @foreach ($replies as $reply)
       <div class="replies">
         <p>投稿日</p>
-        <p>{{ $replie->created_at }}</p>
+        <p>{{ $reply->created_at }}</p>
         <p>投稿者</p>
-        <p>{{ Replie::find($replie->id)->user()->first()->name }}</p>
+        <p>{{ Reply::find($reply->id)->user->name }}</p>
         <p>コメント</p>
-        <p>{{ $replie->comment }}</p>
+        <p>{{ $reply->comment }}</p>
       </div>
       @endforeach
     </div>
@@ -70,8 +70,8 @@ use App\Models\Replie;
       <form action="{{ route('comments.store',['post_id' => $post->id]) }}" method="post" enctype="multipart/form-data">
          @csrf
          <p>コメントする</p>
-        <dt><label for="Reply">本文</label></dt>
-        <dd><textarea name="Reply" rows="4" cols="40"></textarea></dd>
+        <dt><label for="reply">本文</label></dt>
+        <dd><textarea name="reply" rows="4" cols="40"></textarea></dd>
         <input type="submit" value="送信" >
       </form>
     </div>

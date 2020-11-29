@@ -18,6 +18,6 @@ class Post extends Model
 
     public function replies()
     {
-           return $this->hasMany('App\Models\Replie');
+           return $this->hasMany('App\Models\Reply');
     }
 }

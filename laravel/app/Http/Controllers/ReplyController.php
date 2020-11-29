@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Replie;
+use App\Models\Reply;
 use App\Models\Post;
 use Auth;
 
-class ReplieController extends Controller
+class ReplyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class ReplieController extends Controller
     public function index($id)
     {
       $post = Post::find($id);
-      $replies = Post::find($id)->replies()->get();
-      return view('replies',compact('post','replies'));
+      $replies = $post->replies()->get();
+      return view('reply',compact('post','replies'));
     }
 
     /**
@@ -40,18 +40,18 @@ class ReplieController extends Controller
     public function store(Request $request , $id)
     {
         $validatedData = $request->validate([
-            'Reply' => ['required', 'max:255'],
+            'reply' => ['required', 'max:255'],
         ]);
 
         if (Auth::check() === false) {
             return view('auth/login');
         }
 
-        $Reply = new Replie();
-        $Reply->comment = $validatedData['Reply'];
-        $Reply->user_id = Auth::id();
-        $Reply->post_id = $id;
-        $Reply->save();
+        $reply = new Reply();
+        $reply->comment = $validatedData['reply'];
+        $reply->user_id = Auth::id();
+        $reply->post_id = $id;
+        $reply->save();
 
         return redirect('top');
     }
