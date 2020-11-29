@@ -1,6 +1,9 @@
 <?php
-namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\Replie;
  ?>
 
 <!DOCTYPE html>
@@ -57,18 +60,18 @@ use Illuminate\Support\Facades\Auth;
         <p>投稿日</p>
         <p>{{ $replie->created_at }}</p>
         <p>投稿者</p>
-        <p>{{ $replie->user_name }}</p>
+        <p>{{ Replie::find($replie->id)->user()->first()->name }}</p>
         <p>コメント</p>
         <p>{{ $replie->comment }}</p>
       </div>
       @endforeach
     </div>
     <div>
-      <form action="{{ route('comments.store',['post' => $post->id]) }}" method="post" enctype="multipart/form-data">
+      <form action="{{ route('comments.store',['post_id' => $post->id]) }}" method="post" enctype="multipart/form-data">
          @csrf
          <p>コメントする</p>
-        <dt><label for="Replie">本文</label></dt>
-        <dd><textarea name="Replie" rows="4" cols="40"></textarea></dd>
+        <dt><label for="Reply">本文</label></dt>
+        <dd><textarea name="Reply" rows="4" cols="40"></textarea></dd>
         <input type="submit" value="送信" >
       </form>
     </div>

@@ -18,10 +18,6 @@ class ReplieController extends Controller
     {
       $post = Post::find($id);
       $replies = Post::find($id)->replies()->get();
-      foreach ($replies as $replie) {
-        $user = Post::find($replie->user_id)->user()->first();
-        $replie->user_name = $user->name;
-      }
       return view('replies',compact('post','replies'));
     }
 
@@ -44,18 +40,18 @@ class ReplieController extends Controller
     public function store(Request $request , $id)
     {
         $validatedData = $request->validate([
-            'Replie' => ['required', 'max:255'],
+            'Reply' => ['required', 'max:255'],
         ]);
 
         if (Auth::check() === false) {
             return view('auth/login');
         }
 
-        $replies = new Replie();
-        $replies->comment = $validatedData['Replie'];
-        $replies->user_id = Auth::id();
-        $replies->post_id = $id;
-        $replies->save();
+        $Reply = new Replie();
+        $Reply->comment = $validatedData['Reply'];
+        $Reply->user_id = Auth::id();
+        $Reply->post_id = $id;
+        $Reply->save();
 
         return redirect('top');
     }

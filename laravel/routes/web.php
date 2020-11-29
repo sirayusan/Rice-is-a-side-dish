@@ -29,7 +29,7 @@ Route::resource('posts',PostController::class)->only([
 ]);
 
 //コメント機能
-Route::resource('/posts/{post}/comments',ReplieController::class)->only([
+Route::resource('/posts/{post_id}/comments',ReplieController::class)->only([
     'index','store'
 ]);
 
