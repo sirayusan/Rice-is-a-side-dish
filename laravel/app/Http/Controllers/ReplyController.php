@@ -17,8 +17,8 @@ class ReplyController extends Controller
     public function index($id)
     {
       $post = Post::find($id);
-      $replies = $post->replies()->get();
-      return view('reply',compact('post','replies'));
+
+      return view('reply',compact('post'));
     }
 
     /**

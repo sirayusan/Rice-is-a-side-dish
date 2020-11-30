@@ -4,6 +4,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Replie;
+
+$replies = Post::find($post['id'])->replies()->get();
  ?>
 
 <!DOCTYPE html>
@@ -60,7 +62,7 @@ use App\Models\Replie;
         <p>投稿日</p>
         <p>{{ $reply->created_at }}</p>
         <p>投稿者</p>
-        <p>{{ Reply::find($reply->id)->user->name }}</p>
+        <p>{{ $reply->user->name }}</p>
         <p>コメント</p>
         <p>{{ $reply->comment }}</p>
       </div>
