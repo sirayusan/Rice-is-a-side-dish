@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReplyController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +21,17 @@ use Illuminate\Support\Facades\Route;
 //topページ
 Route::resource('top',TopController::class)->only([
     'index'
-]);;
+]);
 
 //投稿関連
 Route::resource('posts',PostController::class)->only([
     'create', 'store','destroy','edit','update'
-]);;
+]);
+
+//コメント機能
+Route::resource('/posts/{post_id}/comments',ReplyController::class)->only([
+    'index','store'
+]);
 
 //認証機能
 Auth::routes();

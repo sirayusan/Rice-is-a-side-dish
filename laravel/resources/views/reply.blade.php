@@ -1,8 +1,3 @@
-<?php
-namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
- ?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -35,21 +30,13 @@ use Illuminate\Support\Facades\Auth;
     </header>
   <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
   <div class="wrap"></div>
-  <a href="{{ route('posts.create') }}">投稿する</a>
+  <a href="{{ route('top.index') }}">トップへ</a>
   <br>
-  @if (Auth::check() === true)
-  <a href="{{ route('users.show',['user'=>Auth::user()]) }}">profile</a>
-  @endif
-  <br>
-  <!-- postメソッドで移動させるためにformでpost指定 -->
-  <form method="post" name="form_1" id="form_1" action="{{ route('logout') }}">
-      <input type="hidden" name="user_name" placeholder="ユーザー名">
-      <a href="javascript:form_1.submit()">ログアウト</a>
   <p>投稿一覧表示</p>
-  @foreach ($posts as $post)
-    <div class="post">
+    <div>
       <p>タイトル</p>
-      <a href="{{ route('comments.index',['post_id' => $post->id]) }}">{{ $post['title'] }}</a>
+      <p>{{ $post->title }}</p>
+      <p>投稿内容</p>
       <p>{{ $post['comment'] }}</p>
       @if ($post->image ==  "no_image.png")
       <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
@@ -57,6 +44,28 @@ use Illuminate\Support\Facades\Auth;
       <p><img src="{{ asset("/PostImage/$post->image") }}" width="80px"></p>
       @endif
     </div>
-  @endforeach
+    <br>
+    <div>
+      <p>コメント表示</p>
+      @foreach ($post->replies()->get() as $reply)
+      <div class="replies">
+        <p>投稿日</p>
+        <p>{{ $reply->created_at }}</p>
+        <p>投稿者</p>
+        <p>{{ $reply->user->name }}</p>
+        <p>コメント</p>
+        <p>{{ $reply->comment }}</p>
+      </div>
+      @endforeach
+    </div>
+    <div>
+      <form action="{{ route('comments.store',['post_id' => $post->id]) }}" method="post" enctype="multipart/form-data">
+         @csrf
+         <p>コメントする</p>
+        <dt><label for="reply">本文</label></dt>
+        <dd><textarea name="reply" rows="4" cols="40"></textarea></dd>
+        <input type="submit" value="送信" >
+      </form>
+    </div>
   </body>
 </html>
