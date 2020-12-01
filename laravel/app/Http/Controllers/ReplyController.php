@@ -17,7 +17,6 @@ class ReplyController extends Controller
     public function index($id)
     {
       $post = Post::find($id);
-
       return view('reply',compact('post'));
     }
 
@@ -37,7 +36,7 @@ class ReplyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , $id)
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'reply' => ['required', 'max:255'],
@@ -50,7 +49,7 @@ class ReplyController extends Controller
         $reply = new Reply();
         $reply->comment = $validatedData['reply'];
         $reply->user_id = Auth::id();
-        $reply->post_id = $id;
+        $reply->post_id = $request->post_id;
         $reply->save();
 
         return redirect('top');

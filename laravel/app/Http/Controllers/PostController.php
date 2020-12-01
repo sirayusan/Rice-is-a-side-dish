@@ -46,6 +46,7 @@ class PostController extends Controller
         $validatedData = $request->validate([
             'comment' => ['required', 'max:255'],
             'image'   => ['image'],
+            'title'   => ['required', 'max:255'],
         ]);
 
         $post = new Post();
@@ -58,6 +59,7 @@ class PostController extends Controller
             $post->image = $fileName;
         }
 
+        $post->title = $validatedData['title'];
         $post->comment = $validatedData['comment'];
         $post->user_id = Auth::id();
         $post->save();

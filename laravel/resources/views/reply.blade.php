@@ -4,8 +4,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Replie;
-
-$replies = Post::find($post['id'])->replies()->get();
  ?>
 
 <!DOCTYPE html>
@@ -45,7 +43,7 @@ $replies = Post::find($post['id'])->replies()->get();
   <p>投稿一覧表示</p>
     <div>
       <p>タイトル</p>
-      <p>{{ $post['title'] }}</p>
+      <p>{{ $post->title }}</p>
       <p>投稿内容</p>
       <p>{{ $post['comment'] }}</p>
       @if ($post->image ==  "no_image.png")
@@ -57,7 +55,7 @@ $replies = Post::find($post['id'])->replies()->get();
     <br>
     <div>
       <p>コメント表示</p>
-      @foreach ($replies as $reply)
+      @foreach ($post->replies()->get() as $reply)
       <div class="replies">
         <p>投稿日</p>
         <p>{{ $reply->created_at }}</p>
