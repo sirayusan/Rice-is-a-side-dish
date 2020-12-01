@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reply extends Model
 {
     use HasFactory;
-    protected $table = 'Replies';
+    protected $table = 'replies';
 
     protected $guarded = array('id');
 
