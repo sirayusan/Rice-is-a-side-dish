@@ -3,23 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Reply;
-use App\Models\Post;
 use App\Models\Favorite;
+use App\Models\Post;
 use Auth;
 
-class ReplyController extends Controller
+class FavoriteController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-      $post = Post::find($id);
-      $favorite = empty(Favorite::where('post_id',$id)->where('user_id',Auth::id())->first());
-      return view('reply',compact('post','favorite'));
+        //
     }
 
     /**
@@ -38,21 +35,16 @@ class ReplyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        $validatedData = $request->validate([
-            'reply' => ['required', 'max:255'],
-        ]);
-
         if (Auth::check() === false) {
             return view('auth/login');
         }
 
-        $reply = new Reply();
-        $reply->comment = $validatedData['reply'];
-        $reply->user_id = Auth::id();
-        $reply->post_id = $request->post_id;
-        $reply->save();
+        $favorite = new Favorite;
+        $favorite->user_id = Auth::id();
+        $favorite->post_id = $id;
+        $favorite->save();
 
         return redirect('top');
     }
@@ -65,7 +57,7 @@ class ReplyController extends Controller
      */
     public function show($id)
     {
-       //
+        //
     }
 
     /**
@@ -99,6 +91,7 @@ class ReplyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $favorite = Favorite::where('post_id',$id)->where('user_id',Auth::id())->delete();
+        return redirect('top');
     }
 }

@@ -20,4 +20,9 @@ class Post extends Model
     {
            return $this->hasMany('App\Models\Reply');
     }
+
+    public function favorites()
+    {
+           return $this->hasMany('App\Models\Favorite');
+    }
 }

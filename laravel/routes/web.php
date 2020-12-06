@@ -6,6 +6,7 @@ use App\Http\Controllers\TopController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\FavoriteController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,11 @@ Route::resource('posts',PostController::class)->only([
 //コメント機能
 Route::resource('/posts/{post_id}/comments',ReplyController::class)->only([
     'index','store'
+]);
+
+//いいね機能
+Route::resource('/posts/{post_id}/favorites',FavoriteController::class)->only([
+  'store','destroy'
 ]);
 
 //認証機能
