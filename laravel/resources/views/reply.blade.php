@@ -58,16 +58,16 @@
       </div>
       @endforeach
     </div>
-    @if ($favorite)
-      <form action="{{ route('favorites.store',['post_id' => $post->id]) }}" method="post">
-        @csrf
-        <input type="submit" value="いいね" >
-      </form>
-    @else
-    <form action="{{ route('favorites.destroy',['post_id' => $post->id,'favorite'=>$post->id]) }}" method="post">
+    @if ($post->favorite_check())
+    <form action="{{ route('favorites.destroy',['post_id' => $post->id,'favorite'=>$post->get_favorite_id()]) }}" method="post">
       @method('DELETE')
       @csrf
       <input type="submit" value="いいね削除">
+    </form>
+    @else
+    <form action="{{ route('favorites.store',['post_id' => $post->id]) }}" method="post">
+      @csrf
+      <input type="submit" value="いいね" >
     </form>
     @endif
     <div>

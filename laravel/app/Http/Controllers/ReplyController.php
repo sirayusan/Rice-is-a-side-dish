@@ -18,8 +18,7 @@ class ReplyController extends Controller
     public function index($id)
     {
       $post = Post::find($id);
-      $favorite = empty(Favorite::where('post_id',$id)->where('user_id',Auth::id())->first());
-      return view('reply',compact('post','favorite'));
+      return view('reply',compact('post'));
     }
 
     /**
