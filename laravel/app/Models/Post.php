@@ -25,14 +25,14 @@ class Post extends Model
            return $this->hasMany('App\Models\Reply');
     }
 
-    public function favorite()
+    public function favorites()
     {
-        return $this->hasMany('App\Models\Reply');
+        return $this->hasMany('App\Models\Favorite');
     }
 
-    public function favorite_check()
+    public function already_favorite()
     {
-        return DB::table('favorites')->where('post_id', $this->id)->where('user_id',Auth::id())->exists();
+        return Favorite::where('post_id', $this->id)->where('user_id',Auth::id())->exists();
     }
 
     public function get_favorite_id()

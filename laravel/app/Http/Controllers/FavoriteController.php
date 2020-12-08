@@ -91,7 +91,7 @@ class FavoriteController extends Controller
      */
     public function destroy($id)
     {
-        $favorite = Favorite::where('post_id',$id)->where('user_id',Auth::id())->delete();
+        Favorite::where('post_id',$id)->where('user_id',Auth::id())->delete();
         return redirect('top');
     }
 }

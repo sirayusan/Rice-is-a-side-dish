@@ -58,7 +58,7 @@
       </div>
       @endforeach
     </div>
-    @if ($post->favorite_check())
+    @if ($post->already_favorite())
     <form action="{{ route('favorites.destroy',['post_id' => $post->id,'favorite'=>$post->get_favorite_id()]) }}" method="post">
       @method('DELETE')
       @csrf
