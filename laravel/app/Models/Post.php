@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Favorite;
 use Auth;
-use DB;
 
 class Post extends Model
 {
