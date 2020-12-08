@@ -58,6 +58,18 @@
       </div>
       @endforeach
     </div>
+    @if ($post->already_favorite())
+    <form action="{{ route('favorites.destroy',['post_id' => $post->id,'favorite'=>$post->get_favorite_id()]) }}" method="post">
+      @method('DELETE')
+      @csrf
+      <input type="submit" value="いいね削除">
+    </form>
+    @else
+    <form action="{{ route('favorites.store',['post_id' => $post->id]) }}" method="post">
+      @csrf
+      <input type="submit" value="いいね" >
+    </form>
+    @endif
     <div>
       <form action="{{ route('comments.store',['post_id' => $post->id]) }}" method="post" enctype="multipart/form-data">
          @csrf
