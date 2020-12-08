@@ -25,11 +25,6 @@ class Post extends Model
            return $this->hasMany('App\Models\Reply');
     }
 
-    public function favorites()
-    {
-        return $this->hasMany('App\Models\Favorite');
-    }
-
     public function already_favorite()
     {
         return Favorite::where('post_id', $this->id)->where('user_id',Auth::id())->exists();
