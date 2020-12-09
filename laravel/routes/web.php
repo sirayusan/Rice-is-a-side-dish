@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\FollowController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //プロフィール機能
 Route::resource('users',UserController::class)->only([
     'show','store'
+]);
+
+//フォロー機能
+Route::resource('users/{follow_user_id}/follow',FollowController::class)->only([
+  'store','destroy'
 ]);
 
 //ログアウト

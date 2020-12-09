@@ -43,6 +43,20 @@
       @else
       <p><img src="{{ asset("/PostImage/$post->image") }}" width="80px"></p>
       @endif
+      <p>投稿者名</p>
+      <p>{{ $post->user->name }}</p>
+      @if ($post->already_follow())
+      <form action="{{ route('follow.destroy',['follow_user_id' => $post->user->id,'follow'=>Auth::id()]) }}" method="post">
+        @method('DELETE')
+        @csrf
+        <input type="submit" value="フォロー解除">
+      </form>
+      @else
+      <form action="{{ route('follow.store',['follow_user_id' => $post->user->id]) }}" method="post">
+        @csrf
+        <input type="submit" value="フォロー" >
+      </form>
+      @endif
     </div>
     <br>
     <div>
