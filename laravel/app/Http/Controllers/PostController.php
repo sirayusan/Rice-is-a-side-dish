@@ -44,7 +44,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'comment' => ['required', 'max:255'],
+            'comment' => ['max:255'],
             'image'   => ['image'],
             'title'   => ['required', 'max:255'],
         ]);

@@ -3,23 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Reply;
-use App\Models\Post;
 use App\Models\Follow;
 use Auth;
 
-class ReplyController extends Controller
+class FollowController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-      $post = Post::find($id);
-      $follow = new Follow;
-      return view('reply',compact('post','follow'));
+        //
     }
 
     /**
@@ -40,21 +36,11 @@ class ReplyController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'reply' => ['required', 'max:255'],
-        ]);
-
-        if (Auth::check() === false) {
-            return view('auth/login');
-        }
-
-        $reply = new Reply();
-        $reply->comment = $validatedData['reply'];
-        $reply->user_id = Auth::id();
-        $reply->post_id = $request->post_id;
-        $reply->save();
-
-        return redirect('top');
+        $follow = new Follow;
+        $follow->user_id = Auth::id();
+        $follow->follow_user_id = $request->follow_user_id;
+        $follow->save();
+        return redirect()->back();
     }
 
     /**
@@ -65,7 +51,7 @@ class ReplyController extends Controller
      */
     public function show($id)
     {
-       //
+        //
     }
 
     /**
@@ -99,6 +85,7 @@ class ReplyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Follow::where('follow_user_id',$id)->where('user_id',Auth::id())->delete();
+        return redirect()->back();
     }
 }
