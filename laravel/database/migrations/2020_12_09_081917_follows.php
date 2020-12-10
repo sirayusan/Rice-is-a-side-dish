@@ -15,7 +15,7 @@ class Follows extends Migration
     {
         Schema::create('follows', function (Blueprint $table) {
             $table->id();
-            $table->integer('follower_user_id');
+            $table->integer('user_id');
             $table->integer('follow_user_id');
             $table->timestamps();
         });

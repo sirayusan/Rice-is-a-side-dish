@@ -37,10 +37,10 @@ class FollowController extends Controller
     public function store(Request $request)
     {
         $follow = new Follow;
-        $follow->follower_user_id = Auth::id();
+        $follow->user_id = Auth::id();
         $follow->follow_user_id = $request->follow_user_id;
         $follow->save();
-        return redirect('top');
+        return redirect()->back();
     }
 
     /**
@@ -85,7 +85,7 @@ class FollowController extends Controller
      */
     public function destroy($id)
     {
-        Follow::where('follow_user_id',$id)->where('follower_user_id',Auth::id())->delete();
+        Follow::where('follow_user_id',$id)->where('user_id',Auth::id())->delete();
         return redirect()->back();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reply;
 use App\Models\Post;
+use App\Models\Follow;
 use Auth;
 
 class ReplyController extends Controller
@@ -17,7 +18,8 @@ class ReplyController extends Controller
     public function index($id)
     {
       $post = Post::find($id);
-      return view('reply',compact('post'));
+      $follow = new Follow;
+      return view('reply',compact('post','follow'));
     }
 
     /**

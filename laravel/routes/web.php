@@ -50,7 +50,7 @@ Route::resource('users',UserController::class)->only([
 ]);
 
 //フォロー機能
-Route::resource('users/{follow_user_id}/follow',FollowController::class)->only([
+Route::resource('follows',FollowController::class)->only([
   'store','destroy'
 ]);
 

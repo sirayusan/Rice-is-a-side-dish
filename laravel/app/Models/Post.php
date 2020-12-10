@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Favorite;
-use App\Models\Follow;
 use Auth;
 
 class Post extends Model
@@ -33,10 +32,5 @@ class Post extends Model
     public function get_favorite_id()
     {
         return Favorite::where('post_id', $this->id)->where('user_id',Auth::id())->first()->id;
-    }
-
-    public function already_follow()
-    {
-        return Follow::where('follow_user_id',$this->user->id)->where('follower_user_id',Auth::id())->exists();
     }
 }
