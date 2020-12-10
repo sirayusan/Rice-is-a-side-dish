@@ -12,7 +12,7 @@ class Follow extends Model
     protected $table = 'follows';
     public function get_follow_id($id)
     {
-        return Follow::where('follow_user_id',$id)->where('user_id',Auth::id())->first();
+        return Follow::where('follow_user_id',$id)->where('user_id',Auth::id())->first()->follow_user_id;
     }
     public function already_follow($follow_user_id)
     {

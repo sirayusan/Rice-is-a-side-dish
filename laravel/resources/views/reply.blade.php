@@ -46,7 +46,7 @@
       <p>投稿者名</p>
       <p>{{ $post->user->name }}</p>
       @if ($follow->already_follow($post->user->id))
-      <form action="{{ route('follows.destroy',['follow' => $follow->get_follow_id($post->user->id)->follow_user_id]) }}" method="post">
+      <form action="{{ route('follows.destroy',['follow' => $follow->get_follow_id($post->user->id)]) }}" method="post">
         @method('DELETE')
         @csrf
         <input type="submit" value="フォロー解除">
