@@ -65,6 +65,30 @@
         <input type="submit" value="送信">
       </div>
     </form>
+    <div >
+      <p>フォロー一覧</p>
+      @foreach($follows->get_follows() as $follow)
+          <div class="user">
+              @if ($follow->get_follow_user->image ==  "no_image.png")
+                  <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
+              @else
+                  <p><img src="{{ asset("/PostImage/$follow->get_follow_user->image") }}" width="80px"></p>
+              @endif
+              <p>{{ $follow->get_follow_user->name }}</p>
+          </div>
+      @endforeach
+      <p>フォロワー一覧</p>
+      @foreach($follows->get_followers() as $follower)
+          <div class="user">
+              @if ($follower->get_follower_user->image ==  "no_image.png")
+                  <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
+              @else
+                  <p><img src="{{ asset("/PostImage/$follower->get_follower_user->image") }}" width="80px"></p>
+              @endif
+              <p>{{ $follower->get_follower_user->name }}</p>
+          </div>
+      @endforeach
+    </div>
     <p>投稿一覧</p>
     @foreach ($posts as $post)
       <div class="post">

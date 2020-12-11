@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ValidateController;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Follow;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -37,7 +38,9 @@ class UserController extends Controller
 
         $posts = User::find($user->id)->posts()->get();
 
-        return view('profile',compact('user','posts','user_image_path'));
+        $follows = new Follow;
+
+        return view('profile',compact('user','posts','user_image_path','follows'));
     }
 
     //ユーザー情報変更(画像・ユーザー名・自己紹介文)
