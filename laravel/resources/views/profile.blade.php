@@ -75,6 +75,7 @@
                   <p><img src="{{ asset("/PostImage/$follow->get_follow_user->image") }}" width="80px"></p>
               @endif
               <p>{{ $follow->get_follow_user->name }}</p>
+              <p>{{ $follow->get_follow_user->comment }}</p>
           </div>
       @endforeach
       <p>フォロワー一覧</p>
@@ -86,6 +87,7 @@
                   <p><img src="{{ asset("/PostImage/$follower->get_follower_user->image") }}" width="80px"></p>
               @endif
               <p>{{ $follower->get_follower_user->name }}</p>
+              <p>{{ $follow->get_follower_user->comment }}</p>
           </div>
       @endforeach
     </div>
