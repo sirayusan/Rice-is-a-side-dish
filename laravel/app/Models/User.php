@@ -44,6 +44,18 @@ class User extends Authenticatable
 
    public function posts()
    {
-          return $this->hasMany('App\Models\Post');
+      return $this->hasMany('App\Models\Post');
    }
+
+   // フォロワー取得
+    public function followers()
+    {
+        return $this->hasMany('App\Models\Follow','follow_user_id');
+    }
+
+    // フォロー取得
+    public function follows()
+    {
+        return $this->hasMany('App\Models\Follow','user_id');
+    }
 }

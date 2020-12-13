@@ -24,20 +24,8 @@ class UserController extends Controller
         {
             return redirect('top');
         }
-
-        $user = Auth::user();
-
-        //default値の画像ディレクトリが違うのでパスを条件分岐しておく
-        if ($user->image == "no_image.png")
-        {
-            $user_image_path =   asset("/SystemImage/no_image.png");
-        }else{
-            $user_image_path =   asset("/UserImage/$user->image");
-        }
-
-        $posts = User::find($user->id)->posts()->get();
-
-        return view('profile',compact('user','posts','user_image_path'));
+        $user = User::Find($id);
+        return view('profile',compact('user',));
     }
 
     //ユーザー情報変更(画像・ユーザー名・自己紹介文)

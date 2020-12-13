@@ -48,7 +48,11 @@
       <div>
         <br>
         <p>アイコン</p>
-        <img class="logo" src="{{ $user_image_path }}" alt="logo" width="80px">
+        @if ($user->image ==  "no_image.png")
+        <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
+        @else
+        <p><img src="{{ asset("/PostImage/$user->image") }}" width="80px"></p>
+        @endif
         <br>
         <label for="image">画像変更</label>
         <input type="file" name="image" value="">
@@ -65,8 +69,34 @@
         <input type="submit" value="送信">
       </div>
     </form>
+    <div >
+        <p>フォロー一覧</p>
+        @foreach($user->follows as $follow)
+            <div class="user">
+                @if ($follow->user->image ==  "no_image.png")
+                    <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
+                @else
+                    <p><img src="{{ asset("/PostImage/$follow->user->image") }}" width="80px"></p>
+                @endif
+                <p>{{ $follow->user->name  }}</p>
+                <p>{{ $follow->user->comment  }}</p>
+            </div>
+        @endforeach
+        <p>フォロワー一覧</p>
+        @foreach($user->followers as $follower)
+        <div class="user">
+            @if ($follower->user->image ==  "no_image.png")
+            <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
+            @else
+            <p><img src="{{ asset("/PostImage/$follow->user->image") }}" width="80px"></p>
+            @endif
+            <p>{{ $follower->user->name  }}</p>
+            <p>{{ $follower->user->comment  }}</p>
+        </div>
+        @endforeach
+    </div>
     <p>投稿一覧</p>
-    @foreach ($posts as $post)
+    @foreach ($user->posts as $post)
       <div class="post">
         <p>投稿内容</p>
         <p>{{ $post->comment }}</p>
