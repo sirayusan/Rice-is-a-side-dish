@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ValidateController;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Follow;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -25,22 +24,8 @@ class UserController extends Controller
         {
             return redirect('top');
         }
-
         $user = User::Find($id);
-
-        //default値の画像ディレクトリが違うのでパスを条件分岐しておく
-        if ($user->image == "no_image.png")
-        {
-            $user_image_path =   asset("/SystemImage/no_image.png");
-        }else{
-            $user_image_path =   asset("/UserImage/$user->image");
-        }
-
-        $posts = $user->posts()->get();
-
-        $follows = new Follow;
-
-        return view('profile',compact('user','posts','user_image_path','follows'));
+        return view('profile',compact('user',));
     }
 
     //ユーザー情報変更(画像・ユーザー名・自己紹介文)
