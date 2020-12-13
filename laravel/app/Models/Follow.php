@@ -21,25 +21,8 @@ class Follow extends Model
         return Follow::where('follow_user_id',$follow_user_id)->where('user_id',Auth::id())->exists();
     }
 
-    // フォロワー取得
-    public function get_followers()
+    public function user()
     {
-      return Follow::where('follow_user_id',Auth::id())->get();
-    }
-
-    public function get_follower_user()
-    {
-      return $this->belongsTo('App\Models\User','user_id');
-    }
-
-    // フォロー取得
-    public function get_follows()
-    {
-        return Follow::where('user_id',Auth::id())->get();
-    }
-
-    public function get_follow_user()
-    {
-      return $this->belongsTo('App\Models\User','follow_user_id');
+        return $this->belongsTo('App\Models\User');
     }
 }

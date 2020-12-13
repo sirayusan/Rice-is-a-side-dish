@@ -26,7 +26,7 @@ class UserController extends Controller
             return redirect('top');
         }
 
-        $user = Auth::user();
+        $user = User::Find($id);
 
         //default値の画像ディレクトリが違うのでパスを条件分岐しておく
         if ($user->image == "no_image.png")
@@ -36,7 +36,7 @@ class UserController extends Controller
             $user_image_path =   asset("/UserImage/$user->image");
         }
 
-        $posts = User::find($user->id)->posts()->get();
+        $posts = $user->posts()->get();
 
         $follows = new Follow;
 
