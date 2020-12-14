@@ -17,8 +17,23 @@ class PostSeeder extends Seeder
     {
       DB::table('posts')->insert([
         'user_id' => '1',
-        'title'   => Str::random(10),
-        'comment' => Str::random(10),
+        'title'   => '管理者投稿確認',
+        'comment' => '確認用',
+      ]);
+      DB::table('posts')->insert([
+        'user_id' => '2',
+        'title'   => 'フォローアカウント投稿確認',
+        'comment' => '確認用',
+      ]);
+      DB::table('posts')->insert([
+        'user_id' => '3',
+        'title'   => 'フォロワーアカウント投稿確認',
+        'comment' => '確認用',
+      ]);
+      DB::table('posts')->insert([
+        'user_id' => '4',
+        'title'   => '相互フォローアカウント投稿確認',
+        'comment' => '確認用',
       ]);
     }
 }

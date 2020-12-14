@@ -71,6 +71,7 @@
     </form>
     <div >
         <p>フォロー一覧</p>
+        <p>フォロー数{{ $user->follows->count() }}</p>
         @foreach($user->follows as $follow)
             <div class="user">
                 @if ($follow->user->image ==  "no_image.png")
@@ -83,6 +84,7 @@
             </div>
         @endforeach
         <p>フォロワー一覧</p>
+        <p>フォロー数{{ $user->followers->count() }}</p>
         @foreach($user->followers as $follower)
         <div class="user">
             @if ($follower->user->image ==  "no_image.png")

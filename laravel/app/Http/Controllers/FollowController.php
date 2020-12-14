@@ -34,14 +34,21 @@ class FollowController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $follow = new Follow;
-        $follow->user_id = Auth::id();
-        $follow->follow_user_id = $request->follow_user_id;
-        $follow->save();
-        return redirect()->back();
-    }
+     public function store(Request $request)
+     {
+         if ($request->follow_user_id == Auth::id())
+         {
+             return back()->with('error', '自分自身をフォローすることはできません');
+         }else{
+             $follow = new Follow;
+             //フォローする側
+             $follow->user_id = Auth::id();
+             //フォローされる側
+             $follow->follow_user_id = $request->follow_user_id;
+             $follow->save();
+             return redirect()->back();
+         }
+     }
 
     /**
      * Display the specified resource.
