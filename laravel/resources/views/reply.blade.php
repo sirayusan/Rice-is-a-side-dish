@@ -30,6 +30,11 @@
     </header>
   <!-- gloval_fixed_menuの初位置を確保すためのタグ -->
   <div class="wrap"></div>
+  @if (session('error'))
+  <p class="text-danger mt-3">
+    {{ session('error') }}
+  </p>
+  @endif
   <a href="{{ route('top.index') }}">トップへ</a>
   <br>
   <p>投稿一覧表示</p>

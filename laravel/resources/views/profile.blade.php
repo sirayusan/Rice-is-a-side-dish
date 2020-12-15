@@ -71,28 +71,30 @@
     </form>
     <div >
         <p>フォロー一覧</p>
+        <p>フォロー数{{ $user->follows->count() }}</p>
         @foreach($user->follows as $follow)
             <div class="user">
-                @if ($follow->user->image ==  "no_image.png")
+                @if ($follow->follow_user->image ==  "no_image.png")
+                    <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
+                @else
+                    <p><img src="{{ asset("/PostImage/$follow->follow_user->image") }}" width="80px"></p>
+                @endif
+                <p>{{ $follow->follow_user->name  }}</p>
+                <p>{{ $follow->follow_user->comment  }}</p>
+            </div>
+        @endforeach
+        <p>フォロワー一覧</p>
+        <p>フォロワー数{{ $user->followers->count() }}</p>
+        @foreach($user->followers as $follower)
+            <div class="user">
+                @if ($follower->user->image ==  "no_image.png")
                     <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
                 @else
                     <p><img src="{{ asset("/PostImage/$follow->user->image") }}" width="80px"></p>
                 @endif
-                <p>{{ $follow->user->name  }}</p>
-                <p>{{ $follow->user->comment  }}</p>
+                <p>{{ $follower->user->name  }}</p>
+                <p>{{ $follower->user->comment  }}</p>
             </div>
-        @endforeach
-        <p>フォロワー一覧</p>
-        @foreach($user->followers as $follower)
-        <div class="user">
-            @if ($follower->user->image ==  "no_image.png")
-            <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
-            @else
-            <p><img src="{{ asset("/PostImage/$follow->user->image") }}" width="80px"></p>
-            @endif
-            <p>{{ $follower->user->name  }}</p>
-            <p>{{ $follower->user->comment  }}</p>
-        </div>
         @endforeach
     </div>
     <p>投稿一覧</p>
