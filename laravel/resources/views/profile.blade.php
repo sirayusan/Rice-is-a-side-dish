@@ -74,17 +74,17 @@
         <p>フォロー数{{ $user->follows->count() }}</p>
         @foreach($user->follows as $follow)
             <div class="user">
-                @if ($follow->get_follow_user->image ==  "no_image.png")
+                @if ($follow->follow_user->image ==  "no_image.png")
                     <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
                 @else
-                    <p><img src="{{ asset("/PostImage/$follow->get_follow_user->image") }}" width="80px"></p>
+                    <p><img src="{{ asset("/PostImage/$follow->follow_user->image") }}" width="80px"></p>
                 @endif
-                <p>{{ $follow->get_follow_user->name  }}</p>
-                <p>{{ $follow->get_follow_user->comment  }}</p>
+                <p>{{ $follow->follow_user->name  }}</p>
+                <p>{{ $follow->follow_user->comment  }}</p>
             </div>
         @endforeach
         <p>フォロワー一覧</p>
-        <p>フォロー数{{ $user->followers->count() }}</p>
+        <p>フォロワー数{{ $user->followers->count() }}</p>
         @foreach($user->followers as $follower)
         <div class="user">
             @if ($follower->user->image ==  "no_image.png")
