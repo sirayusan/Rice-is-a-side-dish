@@ -40,13 +40,13 @@ class FollowController extends Controller
          {
              return back()->with('error', '自分自身をフォローすることはできません');
          }
-             $follow = new Follow;
-             //フォローする側
-             $follow->user_id = Auth::id();
-             //フォローされる側
-             $follow->follow_user_id = $request->follow_user_id;
-             $follow->save();
-             return redirect()->back();
+         $follow = new Follow;
+         //フォローする側
+         $follow->user_id = Auth::id();
+         //フォローされる側
+         $follow->follow_user_id = $request->follow_user_id;
+         $follow->save();
+         return redirect()->back();
      }
 
     /**

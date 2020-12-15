@@ -86,15 +86,15 @@
         <p>フォロワー一覧</p>
         <p>フォロワー数{{ $user->followers->count() }}</p>
         @foreach($user->followers as $follower)
-        <div class="user">
-            @if ($follower->user->image ==  "no_image.png")
-            <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
-            @else
-            <p><img src="{{ asset("/PostImage/$follow->user->image") }}" width="80px"></p>
-            @endif
-            <p>{{ $follower->user->name  }}</p>
-            <p>{{ $follower->user->comment  }}</p>
-        </div>
+            <div class="user">
+                @if ($follower->user->image ==  "no_image.png")
+                    <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
+                @else
+                    <p><img src="{{ asset("/PostImage/$follow->user->image") }}" width="80px"></p>
+                @endif
+                <p>{{ $follower->user->name  }}</p>
+                <p>{{ $follower->user->comment  }}</p>
+            </div>
         @endforeach
     </div>
     <p>投稿一覧</p>
