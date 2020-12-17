@@ -54,5 +54,8 @@ Route::resource('follows',FollowController::class)->only([
   'store','destroy'
 ]);
 
+//フォロー機能
+Route::get('follows',[App\Http\Controllers\FollowController::class, 'post_index'])->name('follow.post_index');
+
 //ログアウト
 Route::post('/user/logout',[UserController::class,'user_logout'])->name('user_logout');

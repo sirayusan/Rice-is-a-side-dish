@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Follow;
+use App\Models\User;
 use Auth;
 
 class FollowController extends Controller
@@ -16,6 +17,12 @@ class FollowController extends Controller
     public function index()
     {
         //
+    }
+
+    public function post_index()
+    {
+        $user = User::find(Auth::id());
+        return view('follow_post',compact('user'));
     }
 
     /**
