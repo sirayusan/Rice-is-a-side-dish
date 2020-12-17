@@ -119,16 +119,18 @@
     @endforeach
     <br>
     <p>新着</p>
-    @foreach ($user->new_posts->take(6) as $post)
-            <br>
-            <p>フォロ－している
+    <div>
+        @foreach ($user->new_posts->take(6) as $post)
+        <br>
+        <p>フォロ－している
             @if ($post->user->image ==  "no_image.png")
-            <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
+                <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
             @else
-            <p><img src="{{ asset("/PostImage/$post->user->image") }}" width="80px"></p>
+                <p><img src="{{ asset("/PostImage/$post->user->image") }}" width="80px"></p>
             @endif
             {{ $post->user->name }}さんが新しい投稿<a href="{{ route('comments.index',['post_id' => $post->id]) }}">{{ $post->title }}</a>をしました！</p>
-    @endforeach
-    <a href="{{ route('follow.post_index') }}">もっとみる</a>
+            @endforeach
+        <a href="{{ route('follow.post_index') }}">もっとみる</a>
+    </div>
   </body>
 </html>
