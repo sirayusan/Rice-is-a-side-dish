@@ -99,7 +99,7 @@
     </div>
     <p>投稿一覧</p>
     @foreach ($user->posts as $post)
-      <div class="user">
+      <div class="post">
         <p>投稿内容</p>
         <p>{{ $post->comment }}</p>
         @if ($post->image ==  "no_image.png")
