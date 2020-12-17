@@ -97,9 +97,10 @@
             </div>
         @endforeach
     </div>
+    <div>
     <p>投稿一覧</p>
     @foreach ($user->posts as $post)
-      <div class="post">
+      <div class="user">
         <p>投稿内容</p>
         <p>{{ $post->comment }}</p>
         @if ($post->image ==  "no_image.png")
@@ -117,10 +118,11 @@
         </form>
       </div>
     @endforeach
+    </div>
     <br>
     <p>新着</p>
     <div>
-        @foreach ($user->new_posts->take(6) as $post)
+        @foreach ($user->follow_user_posts->take(6) as $post)
         <br>
         <p>フォロ－している
             @if ($post->user->image ==  "no_image.png")
@@ -128,7 +130,7 @@
             @else
                 <p><img src="{{ asset("/PostImage/$post->user->image") }}" width="80px"></p>
             @endif
-            {{ $post->user->name }}さんが新しい投稿<a href="{{ route('comments.index',['post_id' => $post->id]) }}">{{ $post->title }}</a>をしました！</p>
+            {{ $post->user->name }}さんが新しい<a href="{{ route('comments.index',['post_id' => $post->id]) }}">{{ $post->title }}</a>を投稿しました！</p>
             @endforeach
         <a href="{{ route('follow.post_index') }}">もっとみる</a>
     </div>

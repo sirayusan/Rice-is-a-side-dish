@@ -35,7 +35,7 @@
     <br>
     <a href="{{ route('top.index') }}">トップへ</a>
     <div>
-        @foreach ($user->new_posts as $post)
+        @foreach ($user->follow_user_posts as $post)
             <div class="post">
                 <p>{{ $post->user->name }}</p>
                 <p><a href="{{ route('comments.index',['post_id' => $post->id]) }}">{{ $post->title }}</a></p>
