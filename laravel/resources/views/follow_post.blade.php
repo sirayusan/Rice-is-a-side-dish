@@ -38,7 +38,7 @@
         @foreach ($user->new_posts as $post)
             <div class="post">
                 <p>{{ $post->user->name }}</p>
-                <p>{{ $post->title }}</p>
+                <p><a href="{{ route('comments.index',['post_id' => $post->id]) }}">{{ $post->title }}</a></p>
                 <p>{{ $post->comment }}</p>
             </div>
         @endforeach
