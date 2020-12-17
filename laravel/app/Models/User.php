@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Follow','user_id');
     }
+
+    public function new_posts()
+    {
+        return $this->hasManyThrough('App\Models\Post', 'App\Models\Follow','follow_user_id','user_id',)->latest('created_at');
+    }
 }
