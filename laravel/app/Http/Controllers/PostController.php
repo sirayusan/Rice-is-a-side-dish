@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use Auth;
+use File;
+use Str;
 
 class PostController extends Controller
 {
@@ -41,31 +43,28 @@ class PostController extends Controller
      * post_complete.blade.php
      * $store_post_create
      */
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'comment' => ['max:255'],
-            'image'   => ['image'],
-            'title'   => ['required', 'max:255'],
-        ]);
+     public function store(Request $request)
+     {
+         $validatedData = $request->validate([
+             'comment' => ['max:255'],
+             'title'   => ['required', 'max:255'],
+         ]);
 
-        $post = new Post();
+         $post = new Post();
 
-        if (isset($request['image']))
-        {
-            $fileName = hash('sha256',time() . $request['image']->getClientOriginalName());
-            $target_path = storage_path('app/public/image/PostImage');
-            $request['image']->move($target_path, $fileName);
-            $post->image = $fileName;
+         //画像はbase64で受け取っている。
+         if(strpos($request->image,'data:image/png;base64') !== false){
+             $image = base64_decode(str_replace(' ', '+',str_replace('data:image/png;base64,', '', $request->image)));
+             $post->image = hash('sha256',Str::random(20).time()).'.'.'png';
+             File::put(storage_path('app/public/image/PostImage'). '/' . $post->image, $image);
         }
+         $post->title = $validatedData['title'];
+         $post->comment = $validatedData['comment'];
+         $post->user_id = Auth::id();
+         $post->save();
 
-        $post->title = $validatedData['title'];
-        $post->comment = $validatedData['comment'];
-        $post->user_id = Auth::id();
-        $post->save();
-
-        return redirect('top');
-    }
+         return redirect('top');
+     }
 
     /**
     * Display the specified resource.
