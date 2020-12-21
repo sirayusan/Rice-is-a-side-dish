@@ -96,27 +96,29 @@ class PostController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-   public function update(Request $request, $id)
-   {
-       //$requestのバリデート
-       $validatedData = $request->validate([
-           'comment' => ['required', 'max:255'],
-           'image'   => ['image'],
-       ]);
+    public function update(Request $request, $id)
+    {
+        //$requestのバリデート
+        $validatedData = $request->validate([
+            'comment' => ['required', 'max:255'],
+            'image'   => ['image'],
+        ]);
 
-       $post = Post::find($id);
-       if (isset($request['image']))
-       {
-         $fileName = hash('sha256',time() . $request['image']->getClientOriginalName());
-         $target_path = storage_path('app/public/image/PostImage');
-         $request['image']->move($target_path, $fileName);
-         $post->image = $fileName;
-       }
-       $post->comment = $validatedData['comment'];
-       $post->update();
+        $post = Post::find($id);
+        if (isset($request['image']))
+        {
+            $fileName = hash('sha256',time() . $request['image']->getClientOriginalName());
+            $target_path = storage_path('app/public/image/PostImage');
+            $request['image']->move($target_path, $fileName);
+            $post->image = $fileName;
+        }else{
+            return back()->with('error', '選択できるのは画像のみです。');
+        }
+        $post->comment = $validatedData['comment'];
+        $post->update();
 
-       return redirect('top');
-   }
+        return redirect('top');
+    }
 
   /**
    * Remove the specified resource from storage.
