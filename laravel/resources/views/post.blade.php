@@ -9,7 +9,6 @@
     <!-- スタイル指定 -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
     <!-- モーダル表示用bootstrap読み込み -->
-
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/mycrop.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/croppie.css') }}">
 </head>
@@ -49,11 +48,11 @@
     <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <dt><label for="title">タイトル</label></dt>
-        <dd><textarea name="title" rows="4" cols="40"></textarea></dd>
+        <dd><input name="title" rows="4" cols="40"></dd>
         <div id="input-form">
             <div id="image-area">
                 <div id="image-style">
-                    <img src="{{ asset('SystemImage/no_image.png')}}" alt="投稿画像" id="image-output">
+                    <img class="image-output" src="{{ asset('SystemImage/no_image.png')}}" alt="投稿画像">
                 </div>
                 <label>
                     <input type="file" id="image" name="image" accept="image/*" class="image" >
@@ -86,7 +85,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js"></script>
-    <script src="{{ asset('/js/mycrop.js') }}"></script>
+    <script src="{{ asset('/js/post_crop.js') }}"></script>
     </form>
     <a href="{{ route('top.index') }}">トップへ</a>
     <br>

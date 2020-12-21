@@ -114,10 +114,15 @@ button.close {
     position: relative;
 }
 
-#image-area #image-output {
+#image-area .image-output {
     width: 100px;
 }
 
 .crop_hidden {
     display: none;
+}
+
+.iconImage {
+    border-radius: 50%;
+    width: 100px;
 }

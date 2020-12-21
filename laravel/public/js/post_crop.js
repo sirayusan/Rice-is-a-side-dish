@@ -17,7 +17,7 @@ $uploadCrop = $('#upload-demo').croppie({
     viewport: {
         width: 200,
         height: 200,
-        circle: false,
+        type: 'square'
     },
     showZoomer: false,
     enableResize: true,
@@ -44,7 +44,7 @@ $('#cropImageBtn').on('click', function (ev) {
         format: 'png',
         backgroundColor: '#fff',
     }).then(function (resp) {
-        $('#image-output').attr('src', resp);
+        $('.image-output').attr('src', resp);
         $('#cropImage').val(resp);
         $('#cropImagePop').modal('hide');
     });

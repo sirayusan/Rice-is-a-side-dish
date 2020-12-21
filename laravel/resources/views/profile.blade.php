@@ -7,6 +7,10 @@
     <link href="{{ asset('css/reset.css') }}" rel="stylesheet" />
     <!-- スタイル指定 -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+    <!-- モーダル表示用bootstrap読み込み -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/mycrop.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/croppie.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/icon_croppie.css') }}">
   </head>
   <body>
     <header id="sample">
@@ -35,27 +39,54 @@
     <br>
     <a href="{{ route('top.index') }}">トップへ</a>
     <form action="/users" method="post" enctype="multipart/form-data">
-      {{ csrf_field() }}
-      @if ($errors->any())
-	    <div class="alert alert-danger">
-	        <ul>
-	            @foreach ($errors->all() as $error)
-	                <li>{{ $error }}</li>
-	            @endforeach
-	        </ul>
-	    </div>
-	    @endif
-      <div>
-        <br>
-        <p>アイコン</p>
-        @if ($user->image ==  "no_image.png")
-        <p><img src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
-        @else
-        <p><img src="{{ asset("/PostImage/$user->image") }}" width="80px"></p>
+        {{ csrf_field() }}
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
         @endif
-        <br>
-        <label for="image">画像変更</label>
-        <input type="file" name="image" value="">
+        <div>
+            <br>
+            <p>アイコン</p>
+            @if ($user->image ==  "no_image.png")
+                <p><img class="iconImage" src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>
+            @else
+            <div id="image-style">
+                <p><img class="iconImage" src="{{ asset("/UserImage/$user->image") }}" width="80px"></p>
+            </div>
+            @endif
+            <br>
+            <label for="image">画像変更</label>
+            <div id="input-form">
+                <div id="image-area">
+                    <label>
+                        <input type="file" id="image" name="image" accept="image/*" class="image" >
+                    </label>
+                </div>
+                <!-- モーダル本体 -->
+                <div class="modal fade" id="cropImagePop" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="upload-demo" class="center-block"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="modal-btn-cancel" data-dismiss="modal">キャンセル</button>
+                                <button type="button" id="cropImageBtn" class="modal-bton-crop">決定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="cropImage" name="image" value="" />
+        </div>
         <br>
         <label for="name">名前</label>
         <input type="text" name="name" value="{{ $user->name }}">
@@ -67,7 +98,11 @@
         <input type="text" name="comment" value="{{ $user->comment }}">
         <br>
         <input type="submit" value="送信">
-      </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js"></script>
+        <script src="{{ asset('/js/icon_crop.js') }}"></script>
     </form>
     <div >
         <p>フォロー一覧</p>

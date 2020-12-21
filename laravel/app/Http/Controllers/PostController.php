@@ -57,7 +57,9 @@ class PostController extends Controller
              $image = base64_decode(str_replace(' ', '+',str_replace('data:image/png;base64,', '', $request->image)));
              $post->image = hash('sha256',Str::random(20).time()).'.'.'png';
              File::put(storage_path('app/public/image/PostImage'). '/' . $post->image, $image);
-        }
+         }else{
+             return back()->with('error', '選択できるのは画像のみです。');
+         }
          $post->title = $validatedData['title'];
          $post->comment = $validatedData['comment'];
          $post->user_id = Auth::id();
@@ -101,16 +103,14 @@ class PostController extends Controller
         //$requestのバリデート
         $validatedData = $request->validate([
             'comment' => ['required', 'max:255'],
-            'image'   => ['image'],
         ]);
 
         $post = Post::find($id);
-        if (isset($request['image']))
-        {
-            $fileName = hash('sha256',time() . $request['image']->getClientOriginalName());
-            $target_path = storage_path('app/public/image/PostImage');
-            $request['image']->move($target_path, $fileName);
-            $post->image = $fileName;
+        //画像はbase64で受け取っている。
+        if(strpos($request->image,'data:image/png;base64') !== false){
+            $image = base64_decode(str_replace(' ', '+',str_replace('data:image/png;base64,', '', $request->image)));
+            $post->image = hash('sha256',Str::random(20).time()).'.'.'png';
+            File::put(storage_path('app/public/image/PostImage'). '/' . $post->image, $image);
         }else{
             return back()->with('error', '選択できるのは画像のみです。');
         }
