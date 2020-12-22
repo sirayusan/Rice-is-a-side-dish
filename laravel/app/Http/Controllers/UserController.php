@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
+use Str;
+use File;
 
 class UserController extends Controller
 {
@@ -35,17 +37,17 @@ class UserController extends Controller
         $user->name = $request['name'];
         $user->comment = $request['comment'];
 
-        //formから画像ファイルの実態を受け取っていたら画像ファイル名取得し、保存する
-        if (isset($request['image']))
-        {
-            $fileName = hash('sha256',time() . $request['image']->getClientOriginalName());
-            $target_path = storage_path('app/public/image/UserImage');
-            $request['image']->move($target_path, $fileName);
-            $user->image = $fileName;
+        //画像はbase64で受け取っている。
+        if(strpos($request->image,'data:image/png;base64') !== false){
+            $image = base64_decode(str_replace(' ', '+',str_replace('data:image/png;base64,', '', $request->image)));
+            $user->image = hash('sha256',Str::random(20).time()).'.'.'png';
+            File::put(storage_path('app/public/image/UserImage'). '/' . $user->image, $image);
+        }else{
+            return back()->with('error', '選択できるのは画像のみです。');
         }
 
         $user->update();
 
-        return redirect('top');
+        return redirect()->back();
     }
 }
