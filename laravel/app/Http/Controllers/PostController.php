@@ -126,7 +126,7 @@ class PostController extends Controller
                 $post->image = hash('sha256',Str::random(20).time()).'.'.'png';
                 File::put(storage_path('app/public/image/PostImage'). '/' . $post->image, $image);
             }else{
-                return back()->with('error', '選択できるのは画像のみです。');
+                return back()->with('error', '画像が選択されていないか、画像以外が選択されています。');
             }
         }
         $post->comment = $request->comment;
