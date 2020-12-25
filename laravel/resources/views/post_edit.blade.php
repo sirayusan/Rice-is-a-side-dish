@@ -37,7 +37,9 @@
         @method('PUT')
         @csrf
         <dt><label for="title">タイトル</label></dt>
-        <dd><input name="title" rows="4" cols="40" value="{{ $post->comment }}"></dd>
+        <dd><input name="title" rows="4" cols="40" value="{{ $post->title }}"></dd>
+        <dt><label for="tags">タグ</label></dt>
+        <dd><input name="tags" rows="4" cols="40" value="@foreach($post->tags as $tag){{$tag->tag}},@endforeach"></dd>
         <p>画像</p>
         @if ($post->image ==  "no_image.png")
         <p><img class="image-output" src="{{ asset('/SystemImage/no_image.png') }}" width="80px"></p>

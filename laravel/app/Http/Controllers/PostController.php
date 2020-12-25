@@ -113,20 +113,39 @@ class PostController extends Controller
     {
         //$requestのバリデート
         $validatedData = $request->validate([
-            'comment' => ['required', 'max:255'],
+            'title' => ['required', 'max:255'],
         ]);
 
         $post = Post::find($id);
         //画像はbase64で受け取っている。
-        if(strpos($request->image,'data:image/png;base64') !== false){
-            $image = base64_decode(str_replace(' ', '+',str_replace('data:image/png;base64,', '', $request->image)));
-            $post->image = hash('sha256',Str::random(20).time()).'.'.'png';
-            File::put(storage_path('app/public/image/PostImage'). '/' . $post->image, $image);
-        }else{
-            return back()->with('error', '選択できるのは画像のみです。');
+        if (isset($request->image))
+        {
+            if(strpos($request->image,'data:image/png;base64') !== false)
+            {
+                $image = base64_decode(str_replace(' ', '+',str_replace('data:image/png;base64,', '', $request->image)));
+                $post->image = hash('sha256',Str::random(20).time()).'.'.'png';
+                File::put(storage_path('app/public/image/PostImage'). '/' . $post->image, $image);
+            }else{
+                return back()->with('error', '選択できるのは画像のみです。');
+            }
         }
-        $post->comment = $validatedData['comment'];
+        $post->comment = $request->comment;
+        $post->title = $validatedData['title'];
         $post->update();
+
+        //文字列をタグの形式に置換して、dbに保存する
+        $substitute_tag = explode(',',str_replace('，',',',$request->tags));
+        $tag_count = 0;
+        foreach ($post->tags as $tag)
+        {
+            if(isset($substitute_tag))
+            {
+                $tag->tag = $substitute_tag[$tag_count];
+                $tag->post_id = $post->id;
+                $tag->update();
+                ++$tag_count;
+            }
+        }
 
         return redirect('top');
     }
