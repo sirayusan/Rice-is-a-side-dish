@@ -49,6 +49,9 @@
         @csrf
         <dt><label for="title">タイトル</label></dt>
         <dd><input name="title" rows="4" cols="40"></dd>
+        <dt><label for="tags">タグ</label></dt>
+        <dd><input name="tags" rows="4" cols="40"></dd>
+        <div class="bubble1">タグ1,タグ2のように入力してください</div>
         <div id="input-form">
             <div id="image-area">
                 <div id="image-style">

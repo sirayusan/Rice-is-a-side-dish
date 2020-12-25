@@ -41,6 +41,11 @@
     <div>
         <p>タイトル</p>
         <p>{{ $post->title }}</p>
+        <p>
+        @foreach($post->tags as $tag)
+        {{ $tag->tag }}
+        @endforeach
+        </p>
         <p>投稿内容</p>
         <p>{{ $post['comment'] }}</p>
         @if ($post->image ==  "no_image.png")
