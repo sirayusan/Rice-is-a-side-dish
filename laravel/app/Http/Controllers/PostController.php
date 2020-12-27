@@ -168,10 +168,9 @@ class PostController extends Controller
                 for ($i=$tag_count; $i < count($substitute_tags) ; $i++)
                 {
                     $tag = new Tag;
-                    $tag->tag = $substitute_tags[$tag_count];
+                    $tag->tag = $substitute_tags[$i];
                     $tag->post_id = $post->id;
                     $tag->save();
-                    ++$tag_count;
                 }
             }
         }    return redirect('top');
