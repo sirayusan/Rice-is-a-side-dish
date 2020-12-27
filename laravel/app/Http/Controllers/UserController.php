@@ -38,7 +38,8 @@ class UserController extends Controller
         $user->comment = $request['comment'];
 
         //画像はbase64で受け取っている。
-        if(strpos($request->image,'data:image/png;base64') !== false){
+        if(strpos($request->image,'data:image/png;base64') !== false && isset($request->image))
+        {
             $image = base64_decode(str_replace(' ', '+',str_replace('data:image/png;base64,', '', $request->image)));
             $user->image = hash('sha256',Str::random(20).time()).'.'.'png';
             File::put(storage_path('app/public/image/UserImage'). '/' . $user->image, $image);
