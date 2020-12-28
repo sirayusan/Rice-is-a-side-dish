@@ -70,10 +70,10 @@ class PostController extends Controller
         $post->save();
 
         //文字列をタグの形式に置換して、dbに保存する
-        $substitute_tags = explode(',',str_replace('，',',',$request->tags));
-        foreach ($substitute_tags as $substitute_tag) {
-            if(isset($substitute_tags))
-            {
+        if(isset($request->tags))
+        {
+            $substitute_tags = explode(',',str_replace('，',',',$request->tags));
+            foreach ($substitute_tags as $substitute_tag) {
                 $tag = new Tag;
                 $tag->tag = $substitute_tag;
                 $tag->post_id = $post->id;
@@ -139,19 +139,18 @@ class PostController extends Controller
         $post->update();
 
         //タグ処理関係
-        // 空配列を置換すると$substitute_tagsがNULLにならないので$request->tagsをチェックしておく。
-        if (isset($request->tags))
-        {
-            $substitute_tags = explode(',',str_replace('，',',',$request->tags));
-        }
         foreach ($post->tags as $tag) {
             $tag->delete();
         }
-        foreach ($substitute_tags as $substitute_tag) {
-            $tag = new Tag;
-            $tag->tag = $substitute_tag;
-            $tag->post_id = $post->id;
-            $tag->save();
+        if (isset($request->tags))
+        {
+            $substitute_tags = explode(',',str_replace('，',',',$request->tags));
+            foreach ($substitute_tags as $substitute_tag) {
+                $tag = new Tag;
+                $tag->tag = $substitute_tag;
+                $tag->post_id = $post->id;
+                $tag->save();
+            }
         }
         return redirect('top');
     }
