@@ -139,41 +139,21 @@ class PostController extends Controller
         $post->update();
 
         //タグ処理関係
-        $substitute_tags = explode(',',str_replace('，',',',$request->tags));
-        $tag_count = 0;
-        if($post->tags->count() == 0 && isset($request->tags)){
-            foreach ($substitute_tags as $substitute_tag)
-            {
-                $tag = new Tag;
-                $tag->tag = $substitute_tag;
-                $tag->post_id = $post->id;
-                $tag->save();
-            }
-        }elseif(isset($request->tags)){
-            foreach ($post->tags as $tag)
-            {
-                if(!isset($request->tags))
-                {
-                    $tag->delete();
-                }elseif(count($substitute_tags) <= $post->tags->count() && count($substitute_tags) > $tag_count || count($substitute_tags) > $post->tags->count() && $tag_count <= count($substitute_tags) ) {
-                    $tag->tag = $substitute_tags[$tag_count];
-                    $tag->update();
-                    ++$tag_count;
-                }elseif(count($substitute_tags) < $post->tags->count()){
-                    $tag->delete();
-                }
-            }
-            if(count($substitute_tags) > $post->tags->count())
-            {
-                for ($i=$tag_count; $i < count($substitute_tags) ; $i++)
-                {
-                    $tag = new Tag;
-                    $tag->tag = $substitute_tags[$i];
-                    $tag->post_id = $post->id;
-                    $tag->save();
-                }
-            }
-        }    return redirect('top');
+        // 空配列を置換すると$substitute_tagsがNULLにならないので$request->tagsをチェックしておく。
+        if (isset($request->tags))
+        {
+            $substitute_tags = explode(',',str_replace('，',',',$request->tags));
+        }
+        foreach ($post->tags as $tag) {
+            $tag->delete();
+        }
+        foreach ($substitute_tags as $substitute_tag) {
+            $tag = new Tag;
+            $tag->tag = $substitute_tag;
+            $tag->post_id = $post->id;
+            $tag->save();
+        }
+        return redirect('top');
     }
 
   /**
