@@ -41,6 +41,11 @@ use Illuminate\Support\Facades\Auth;
   <a href="{{ route('users.show',['user'=>Auth::user()]) }}">profile</a>
   @endif
   <br>
+  <form action="{{ route('tag_search.index') }}" method="get">
+      <input type="text" name="tags" value="">
+      <input type="submit" name="" value="検索">
+  </form>
+  <br>
   <!-- postメソッドで移動させるためにformでpost指定 -->
   <form method="post" name="form_1" id="form_1" action="{{ route('logout') }}">
       <input type="hidden" name="user_name" placeholder="ユーザー名">
