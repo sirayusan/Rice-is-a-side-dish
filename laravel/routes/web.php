@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,11 @@ Route::resource('/posts/{post_id}/favorites',FavoriteController::class)->only([
   'store','destroy'
 ]);
 
+//タグ検索
+Route::resource('/tag_search',TagController::class)->only([
+  'index'
+]);
+
 //認証機能
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -49,12 +55,12 @@ Route::resource('users',UserController::class)->only([
     'show','store'
 ]);
 
-//フォロー機能
+//フォロー解除
 Route::resource('follows',FollowController::class)->only([
   'store','destroy'
 ]);
 
-//フォロー機能
+//フォロー
 Route::get('follows',[App\Http\Controllers\FollowController::class, 'post_index'])->name('follow.post_index');
 
 //ログアウト
